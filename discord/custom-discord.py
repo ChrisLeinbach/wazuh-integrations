@@ -65,17 +65,17 @@ fields = [
 descriptions = []
 matched_handlers = [handler_class(alert_json) for handler_class in rule_handlers.get_all_handlers() if alert_id in handler_class.alert_ids]
 for handler in matched_handlers:
-    fields.extend(handler.generate_fields())
-    description = handler.generate_description()
-    if description:
-        descriptions.append(description)
+    if handler.enabled:
+        fields.extend(handler.generate_fields())
+        description = handler.generate_description()
+        if description:
+            descriptions.append(description)
 
 # Check if the handlers set a description entry. If not, use the rule description. If it is set,
 # add the rule description to the end then join them with newlines.
 if not descriptions:
     description = f"Rule Description: {alert_json['rule']['description']}"
 else:
-    descriptions.append(f"Rule Description: {alert_json['rule']['description']}")
     description = "\n".join(descriptions)
 
 # Build data to send to Discord.

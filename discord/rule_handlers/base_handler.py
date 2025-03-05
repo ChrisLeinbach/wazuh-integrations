@@ -6,6 +6,9 @@ class BaseHandler:
     # Subclasses should overload this list of IDs with a list of rule IDs they can handle. IDs are strings.
     alert_ids = ['0']
 
+    # Subclasses should overload this to allow them to be turned on/off as needed.
+    enabled = True
+
     base_field = {
         "name": "ReplaceMe - Name",
         "value": "ReplaceMe - Value",

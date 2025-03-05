@@ -6,6 +6,7 @@ from rule_handlers.base_handler import BaseHandler
 class VulnDetectCVEHandler(BaseHandler):
 
     alert_ids = ['23504', '23505']
+    enabled = True
 
     def __init__(self, alert_data: dict):
         super().__init__(alert_data)
