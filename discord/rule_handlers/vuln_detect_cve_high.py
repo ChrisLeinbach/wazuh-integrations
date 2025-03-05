@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
@@ -28,3 +28,9 @@ class VulnDetectCVEHandler(BaseHandler):
         reference_field["value"] = self.alert_data["data"]["vulnerability"]["reference"]
 
         return [cve_field, score_field, rationale_field, reference_field]
+
+    def generate_description(self) -> Union[str, None]:
+        return (f"{self.alert_data["data"]["vulnerability"]["cve"]} "
+                f"with severity {self.alert_data['data']['vulnerability']['severity']} "
+                f"impacts package {self.alert_data["data"]["vulnerability"]["package"]["name"]}. "
+                f"Rationale: {self.alert_data["data"]["vulnerability"]["rationale"]}")

@@ -61,11 +61,23 @@ fields = [
 ]
 
 # Load the rule handlers. Iterate over the handlers and check if the alert ID matches on any of them.
-# If there is a match, generate the fields for that handler.
+# If there is a match, generate the fields and description(s) for that handler.
+descriptions = []
 all_handlers = [handler_class() for handler_class in rule_handlers.get_all_handlers()]
 for handler in all_handlers:
     if alert_id in handler.alert_ids:
         fields.extend(handler.generate_fields())
+        description = handler.generate_descriptions()
+        if description:
+            descriptions.append(description)
+
+# Check if the handlers set a description entry. If not, use the rule description. If it is set,
+# add the rule description to the end then join them with newlines.
+if not descriptions:
+    description = f"Rule Description: {alert_json["rule"]["description"]}"
+else:
+    descriptions = descriptions.append(f"Rule Description: {alert_json["rule"]["description"]}")
+    description = "\n".join(descriptions)
 
 # Build data to send to Discord.
 payload = json.dumps({
@@ -74,7 +86,7 @@ payload = json.dumps({
         {
             "title": f"Wazuh Alert - Rule {alert_json['rule']['id']}",
             "color": color,
-            "description": alert_json["rule"]["description"],
+            "description": description,
             "fields": fields
         }
     ]
