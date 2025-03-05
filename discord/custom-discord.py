@@ -74,9 +74,9 @@ for handler in all_handlers:
 # Check if the handlers set a description entry. If not, use the rule description. If it is set,
 # add the rule description to the end then join them with newlines.
 if not descriptions:
-    description = f"Rule Description: {alert_json["rule"]["description"]}"
+    description = f"Rule Description: {alert_json['rule']['description']}"
 else:
-    descriptions = descriptions.append(f"Rule Description: {alert_json["rule"]["description"]}")
+    descriptions = descriptions.append(f"Rule Description: {alert_json['rule']['description']}")
     description = "\n".join(descriptions)
 
 # Build data to send to Discord.

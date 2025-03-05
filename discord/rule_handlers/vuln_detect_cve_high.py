@@ -30,7 +30,7 @@ class VulnDetectCVEHandler(BaseHandler):
         return [cve_field, score_field, rationale_field, reference_field]
 
     def generate_description(self) -> Union[str, None]:
-        return (f"{self.alert_data["data"]["vulnerability"]["cve"]} "
+        return (f"{self.alert_data['data']['vulnerability']['cve']} "
                 f"with severity {self.alert_data['data']['vulnerability']['severity']} "
-                f"impacts package {self.alert_data["data"]["vulnerability"]["package"]["name"]}. "
-                f"Rationale: {self.alert_data["data"]["vulnerability"]["rationale"]}")
+                f"impacts package {self.alert_data['data']['vulnerability']['package']['name']}. "
+                f"Rationale: {self.alert_data['data']['vulnerability']['rationale']}")
