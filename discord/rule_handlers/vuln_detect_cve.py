@@ -5,7 +5,7 @@ from rule_handlers.base_handler import BaseHandler
 
 class VulnDetectCVEHandler(BaseHandler):
 
-    id = [23504, 23505]
+    alert_ids = ['23504', '23505']
 
     def __init__(self, alert_data: dict):
         super().__init__(alert_data)

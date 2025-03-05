@@ -3,8 +3,8 @@ from typing import List, Union
 
 class BaseHandler:
 
-    # Subclasses should overload this list of IDs with a list of rule IDs they can handle.
-    id = [0]
+    # Subclasses should overload this list of IDs with a list of rule IDs they can handle. IDs are strings.
+    alert_ids = ['0']
 
     base_field = {
         "name": "ReplaceMe - Name",
