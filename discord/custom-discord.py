@@ -3,6 +3,7 @@
 import sys
 import requests
 import json
+import rule_handlers
 
 """
 ossec.conf configuration structure
@@ -22,8 +23,9 @@ hook_url = sys.argv[3]
 with open(alert_file) as f:
     alert_json = json.loads(f.read())
 
-# Extract alert level from the alert.
+# Extract alert level and ID from the alert.
 alert_level = alert_json["rule"]["level"]
+alert_id = alert_json['rule']['id']
 
 # Determine which agent caused the alert.
 if "agentless" in alert_json:
@@ -58,7 +60,14 @@ fields = [
     }
 ]
 
-# combine message details
+# Load the rule handlers. Iterate over the handlers and check if the alert ID matches on any of them.
+# If there is a match, generate the fields for that handler.
+all_handlers = [handler_class() for handler_class in rule_handlers.get_all_handlers()]
+for handler in all_handlers:
+    if alert_id in handler.alert_ids:
+        fields.extend(handler.generate_fields())
+
+# Build data to send to Discord.
 payload = json.dumps({
     "content": "",
     "embeds": [
@@ -71,6 +80,6 @@ payload = json.dumps({
     ]
 })
 
-# send message to discord
+# Send alert to Discord Webhook
 r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"})
 sys.exit(0)
