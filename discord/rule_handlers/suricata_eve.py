@@ -28,24 +28,17 @@ class SuricataEve(BaseHandler):
         severity_field["name"] = "Severity"
         severity_field["value"] = self.alert_data["data"]["alert"]["severity"]
 
-        src_ip_field = deepcopy(self.base_field)
-        src_ip_field["name"] = "Source"
+        protocol = self.alert_data["data"]["proto"]
         source_ip = self.alert_data["data"]["flow"]["src_ip"]
         source_port = self.alert_data["data"]["flow"]["src_port"]
-        src_ip_field["value"] = f"{source_ip}:{source_port}"
-
-        dst_ip_field = deepcopy(self.base_field)
-        dst_ip_field["name"] = "Destination"
         dest_ip = self.alert_data["data"]["flow"]["dest_ip"]
         dest_port = self.alert_data["data"]["flow"]["dest_port"]
-        dst_ip_field["value"] = f"{dest_ip}:{dest_port}"
 
         conversation_field = deepcopy(self.base_field)
         conversation_field["name"] = "Conversation"
-        protocol = self.alert_data["data"]["proto"]
-        conversation_field["value"] = f"[{protocol}] {source_ip}:{source_port} --> {dest_ip}:{dest_port}"
+        conversation_field["value"] = f"[{protocol}] {source_ip}:{source_port} -> {dest_ip}:{dest_port}"
 
-        alert_data = [sig_field, action_field, severity_field, src_ip_field, dst_ip_field, conversation_field]
+        alert_data = [sig_field, action_field, severity_field, conversation_field]
 
         if "http" in self.alert_data["data"].keys():
             http_host_field = deepcopy(self.base_field)
