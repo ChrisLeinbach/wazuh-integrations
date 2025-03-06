@@ -26,7 +26,7 @@ user = sys.argv[2].split(":")[0]
 hook_url = sys.argv[3]
 
 logging.debug(f'Custom-Discord Initialized. Alert file: {alert_file}, User: {user}, Hook URL: {hook_url}')
-logging.debug(f'Loaded Handlers: {rule_handlers.get_all_handlers()}')
+logging.debug(f'Loaded Handlers: {[cls.__name__ for cls in rule_handlers.get_all_handlers()]}')
 
 # Read JSON data from the alert file.
 with open(alert_file) as f:

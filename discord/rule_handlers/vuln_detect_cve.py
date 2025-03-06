@@ -5,6 +5,10 @@ from rule_handlers.base_handler import BaseHandler
 
 class VulnDetectCVEHandler(BaseHandler):
 
+    """
+    VulnDetectCVEHandler handles alerts where a new CVE is detected by Wazuh.
+    """
+
     alert_ids = ['23504', '23505']
     enabled = True
 
