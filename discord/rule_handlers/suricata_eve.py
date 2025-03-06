@@ -30,29 +30,29 @@ class SuricataEve(BaseHandler):
 
         src_ip_field = deepcopy(self.base_field)
         src_ip_field["name"] = "Source"
-        src_ip_field["value"] = \
-            f'{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}'
+        source_ip = self.alert_data["data"]["flow"]["src_ip"]
+        source_port = self.alert_data["data"]["flow"]["src_port"]
+        src_ip_field["value"] = f"{source_ip}:{source_port}"
 
         dst_ip_field = deepcopy(self.base_field)
         dst_ip_field["name"] = "Destination"
-        dst_ip_field["value"] = \
-            f'{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}'
+        dest_ip = self.alert_data["data"]["flow"]["dest_ip"]
+        dest_port = self.alert_data["data"]["flow"]["dest_port"]
+        dst_ip_field["value"] = f"{dest_ip}:{dest_port}"
 
         conversation_field = deepcopy(self.base_field)
         conversation_field["name"] = "Conversation"
-        conversation_field["value"] = \
-            (f'[{self.alert_data["data"]["proto"]}] '
-             f'{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}'
-             f' --> '
-             f'{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}')
+        protocol = self.alert_data["data"]["proto"]
+        conversation_field["value"] = f"[{protocol}] {source_ip}:{source_port} --> {dest_ip}:{dest_port}"
 
         alert_data = [sig_field, action_field, severity_field, src_ip_field, dst_ip_field, conversation_field]
 
         if "http" in self.alert_data["data"].keys():
             http_host_field = deepcopy(self.base_field)
             http_host_field["name"] = "HTTP Address"
-            http_host_field["value"] = \
-                f"{self.alert_data["data"]["http"]["hostname"]}{self.alert_data["data"]["http"]["url"]}"
+            hostname = self.alert_data["data"]["http"]["hostname"]
+            url = self.alert_data["data"]["http"]["url"]
+            http_host_field["value"] = f"{hostname}{url}"
             alert_data.append(http_host_field)
 
         return alert_data
