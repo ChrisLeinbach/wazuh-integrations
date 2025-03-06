@@ -41,10 +41,10 @@ class SuricataEve(BaseHandler):
         conversation_field = deepcopy(self.base_field)
         conversation_field["name"] = "Conversation"
         conversation_field["value"] = \
-            (f"[{self.alert_data["data"]["proto"]}] "
-             f"{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}"
-             f" --> "
-             f"{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}")
+            (f'[{self.alert_data["data"]["proto"]}] '
+             f'{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}'
+             f' --> '
+             f'{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}')
 
         alert_data = [sig_field, action_field, severity_field, src_ip_field, dst_ip_field, conversation_field]
 
