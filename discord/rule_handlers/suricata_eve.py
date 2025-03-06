@@ -31,12 +31,12 @@ class SuricataEve(BaseHandler):
         src_ip_field = deepcopy(self.base_field)
         src_ip_field["name"] = "Source"
         src_ip_field["value"] = \
-            f"{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}"
+            f'{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}'
 
         dst_ip_field = deepcopy(self.base_field)
         dst_ip_field["name"] = "Destination"
         dst_ip_field["value"] = \
-            f"{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}"
+            f'{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}'
 
         conversation_field = deepcopy(self.base_field)
         conversation_field["name"] = "Conversation"
