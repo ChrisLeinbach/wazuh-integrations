@@ -22,32 +22,38 @@ class SuricataEve(BaseHandler):
 
         action_field = deepcopy(self.base_field)
         action_field["name"] = "Action"
-        action_field["value"] = self.alert_data["data"]["alert"]["action"]
+        action_field["value"] = self.alert_data["data"]["alert"]["action"].capitalize()
 
         severity_field = deepcopy(self.base_field)
         severity_field["name"] = "Severity"
         severity_field["value"] = self.alert_data["data"]["alert"]["severity"]
 
         src_ip_field = deepcopy(self.base_field)
-        src_ip_field["name"] = "Source IP"
-        src_ip_field["value"] = self.alert_data["data"]["flow"]["src_ip"]
+        src_ip_field["name"] = "Source"
+        src_ip_field["value"] = \
+            f"{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}"
 
         dst_ip_field = deepcopy(self.base_field)
-        dst_ip_field["name"] = "Destination IP"
-        dst_ip_field["value"] = self.alert_data["data"]["flow"]["dest_ip"]
+        dst_ip_field["name"] = "Destination"
+        dst_ip_field["value"] = \
+            f"{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}"
 
-        alert_data = [sig_field, action_field, severity_field, src_ip_field, dst_ip_field]
+        conversation_field = deepcopy(self.base_field)
+        conversation_field["name"] = "Conversation"
+        conversation_field["value"] = \
+            (f"[{self.alert_data["data"]["proto"]}] "
+             f"{self.alert_data["data"]["flow"]["src_ip"]}:{self.alert_data["data"]["flow"]["src_port"]}"
+             f" --> "
+             f"{self.alert_data["data"]["flow"]["dest_ip"]}:{self.alert_data["data"]["flow"]["dst_port"]}")
+
+        alert_data = [sig_field, action_field, severity_field, src_ip_field, dst_ip_field, conversation_field]
 
         if "http" in self.alert_data["data"].keys():
             http_host_field = deepcopy(self.base_field)
-            http_host_field["name"] = "HTTP Host Name"
-            http_host_field["value"] = self.alert_data["data"]["http"]["hostname"]
+            http_host_field["name"] = "HTTP Address"
+            http_host_field["value"] = \
+                f"{self.alert_data["data"]["http"]["hostname"]}{self.alert_data["data"]["http"]["url"]}"
             alert_data.append(http_host_field)
-
-            http_url_field = deepcopy(self.base_field)
-            http_url_field["name"] = "HTTP URL"
-            http_url_field["value"] = self.alert_data["data"]["http"]["url"]
-            alert_data.append(http_url_field)
 
         return alert_data
 

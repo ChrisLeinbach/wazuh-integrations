@@ -88,7 +88,7 @@ for handler in matched_handlers:
 # Check if the handlers set a description entry. If not, use the rule description. If it is set,
 # add the rule description to the end then join them with newlines.
 if not descriptions:
-    description = f"Rule Description: {alert_json['rule']['description']}"
+    description = f"{alert_json['rule']['description']}"
 else:
     description = "\n".join(descriptions)
 
