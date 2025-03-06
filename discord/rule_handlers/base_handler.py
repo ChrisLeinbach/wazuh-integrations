@@ -18,6 +18,12 @@ class BaseHandler:
     def __init__(self, alert_data: dict):
         self.alert_data = alert_data
 
+    def __repr__(self):
+        return self.__class__.__name__
+
+    def __str__(self):
+        return self.__class__.__name__
+
     def generate_fields(self) -> List[dict]:
         """ Returns a list of dictionary field elements for discord. These should follow the form of base_field. """
         raise NotImplementedError("Subclasses must implement this method.")
