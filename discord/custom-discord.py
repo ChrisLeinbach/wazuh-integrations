@@ -4,6 +4,7 @@ import sys
 import requests
 import json
 import rule_handlers
+import logging
 
 """
 ossec.conf configuration structure
@@ -14,10 +15,18 @@ ossec.conf configuration structure
  </integration>
 """
 
+LOG_LEVEL = logging.DEBUG
+LOG_FILE = '/var/ossec/logs/custom-discord.log'
+
+logging.basicConfig(level=LOG_LEVEL, filename=LOG_FILE, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+
 # Read arguments - See https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/
 alert_file = sys.argv[1]
 user = sys.argv[2].split(":")[0]
 hook_url = sys.argv[3]
+
+logging.debug(f'Custom-Discord Initialized. Alert file: {alert_file}, User: {user}, Hook URL: {hook_url}')
+logging.debug(f'Loaded Handlers: {rule_handlers.get_all_handlers()}')
 
 # Read JSON data from the alert file.
 with open(alert_file) as f:
@@ -26,6 +35,8 @@ with open(alert_file) as f:
 # Extract alert level and ID from the alert.
 alert_id = alert_json['rule']['id']
 alert_level = alert_json["rule"]["level"]
+
+logging.info(f'Loading Alert ID {alert_id} with level {alert_level}.')
 
 # Determine which agent caused the alert.
 if "agentless" in alert_json:
@@ -62,14 +73,17 @@ fields = [
 
 # Load the rule handlers. Iterate over the handlers and check if the alert ID matches on any of them.
 # If there is a match, generate the fields and description(s) for that handler.
-descriptions = []
 matched_handlers = [handler_class(alert_json) for handler_class in rule_handlers.get_all_handlers() if alert_id in handler_class.alert_ids]
+logging.debug(f'Matched Handlers: {matched_handlers}')
+descriptions = []
 for handler in matched_handlers:
     if handler.enabled:
         fields.extend(handler.generate_fields())
         description = handler.generate_description()
         if description:
             descriptions.append(description)
+    else:
+        logging.debug(f'Handler {handler} disabled.')
 
 # Check if the handlers set a description entry. If not, use the rule description. If it is set,
 # add the rule description to the end then join them with newlines.
@@ -91,6 +105,8 @@ payload = json.dumps({
     ]
 })
 
+logging.info(f'Sending webhook for alert {alert_id}.')
 # Send alert to Discord Webhook
 r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"})
+logging.info(f'Webhook sent successfully for alert {alert_id}.')
 sys.exit(0)
