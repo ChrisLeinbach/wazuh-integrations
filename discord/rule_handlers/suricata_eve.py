@@ -36,7 +36,7 @@ class SuricataEve(BaseHandler):
 
         conversation_field = deepcopy(self.base_field)
         conversation_field["name"] = "Conversation"
-        conversation_field["value"] = f"[{protocol}] {source_ip}:{source_port} -> {dest_ip}:{dest_port}"
+        conversation_field["value"] = f"{protocol} {source_ip}:{source_port} -> {dest_ip}:{dest_port}"
 
         alert_data = [sig_field, action_field, severity_field, conversation_field]
 
@@ -47,6 +47,20 @@ class SuricataEve(BaseHandler):
             url = self.alert_data["data"]["http"]["url"]
             http_host_field["value"] = f"{hostname}{url}"
             alert_data.append(http_host_field)
+
+        if 'tls' in self.alert_data["data"].keys():
+            tls_sni_field = deepcopy(self.base_field)
+            tls_sni_field["name"] = "TLS SNI"
+            tls_sni = self.alert_data["data"]["tls"]["sni"]
+            tls_sni_field["value"] = f"{tls_sni}"
+            alert_data.append(tls_sni_field)
+
+        if 'dns' in self.alert_data["data"].keys():
+            dns_query_field = deepcopy(self.base_field)
+            dns_query_field["name"] = "DNS Query"
+            dns_query = self.alert_data["data"]["dns"]["query"]["rrname"]
+            dns_query_field["value"] = f"{dns_query}"
+            alert_data.append(dns_query_field)
 
         return alert_data
 

@@ -19,8 +19,8 @@ class NetstatPortHandler(BaseHandler):
 
     def generate_description(self) -> Union[str, None]:
         new_lines, removed_lines = self._find_line_deltas(self.alert_data['previous_log'], self.alert_data['full_log'])
-        new_string = f"\nNew Listening Port(s):\n" + "\n".join(new_lines)
-        old_string = f"\nOld Listening Port(s):\n" + "\n".join(removed_lines)
+        new_string = f"\nOpened Port(s):\n" + "\n".join(new_lines)
+        old_string = f"\nClosed Port(s):\n" + "\n".join(removed_lines)
         return f"{new_string}\n{old_string}"
 
     @staticmethod
