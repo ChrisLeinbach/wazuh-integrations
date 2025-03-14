@@ -24,18 +24,31 @@ class VulnDetectCVEHandler(BaseHandler):
         score_field["name"] = "Score"
         score_field["value"] = self.alert_data["data"]["vulnerability"]["score"]["base"]
 
+        status_field = deepcopy(self.base_field)
+        status_field["name"] = "Status"
+        status_field["value"] = self.alert_data["data"]["vulnerability"]["status"]
+
         rationale_field = deepcopy(self.base_field)
         rationale_field["name"] = "Rationale"
         rationale_field["value"] = self.alert_data["data"]["vulnerability"]["rationale"]
 
         reference_field = deepcopy(self.base_field)
         reference_field["name"] = "Reference"
-        reference_field["value"] = self.alert_data["data"]["vulnerability"]["reference"]
+        references = self._format_references(self.alert_data["data"]["vulnerability"]["reference"])
+        reference_field["value"] = references
 
-        return [cve_field, score_field, rationale_field, reference_field]
+        return [cve_field, score_field, status_field, rationale_field, reference_field]
 
     def generate_description(self) -> Union[str, None]:
         return (f"{self.alert_data['data']['vulnerability']['cve']} "
                 f"with severity {self.alert_data['data']['vulnerability']['severity']} "
                 f"impacts package {self.alert_data['data']['vulnerability']['package']['name']}. "
-                f"Rationale: {self.alert_data['data']['vulnerability']['rationale']}")
+                f"\nRationale: {self.alert_data['data']['vulnerability']['rationale']}")
+
+    @staticmethod
+    def _format_references(references: str) -> str:
+        """ Reformats the references entry into a bulleted list. """
+        if ',' in references:
+            return '- ' + '- '.join(references.split(', '))
+        else:
+            return '- ' + references
