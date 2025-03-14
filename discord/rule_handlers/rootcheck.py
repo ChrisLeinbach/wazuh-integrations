@@ -16,11 +16,11 @@ class RootCheckHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        fired_field = deepcopy(self.base_field)
-        fired_field["name"] = "Report"
-        fired_field["value"] = self.alert_data["full_log"]
+        log_field = deepcopy(self.base_field)
+        log_field["name"] = "Report"
+        log_field["value"] = self.alert_data["full_log"]
 
-        return [fired_field]
+        return [log_field]
 
     def generate_description(self) -> Union[str, None]:
         return None
