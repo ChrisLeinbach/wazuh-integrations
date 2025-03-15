@@ -106,7 +106,13 @@ payload = json.dumps({
 })
 
 logging.info(f'Sending webhook for alert {alert_id}.')
-# Send alert to Discord Webhook
 r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"})
-logging.info(f'Webhook sent successfully for alert {alert_id}.')
-sys.exit(0)
+
+if r.ok:
+    logging.info(f'Webhook sent successfully for alert {alert_id}.')
+    sys.exit(0)
+else:
+    logging.info(f'Failed to send webhook for alert {alert_id}. Status Code {r.status_code}.')
+    logging.debug(f"Response from Discord: {r.text}")
+    logging.debug(f"Attempted Payload: {json.dumps(payload)}")
+    sys.exit(1)
