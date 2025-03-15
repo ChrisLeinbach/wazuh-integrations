@@ -27,7 +27,7 @@ class IntegrityHandler(BaseHandler):
 
         attr_field = deepcopy(self.base_field)
         attr_field["name"] = "Changed Attributes"
-        attr_field["value"] = self.alert_data["syscheck"]["changed_attributes"]
+        attr_field["value"] = ", ".join(self.alert_data["syscheck"]["changed_attributes"])
 
         return [file_field, event_field, attr_field]
 
