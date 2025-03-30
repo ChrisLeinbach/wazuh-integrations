@@ -17,15 +17,22 @@ ossec.conf configuration structure
 
 LOG_LEVEL = logging.DEBUG
 LOG_FILE = '/var/ossec/logs/custom-discord.log'
+LOG_HIDE_WEBHOOK_URL = False
 
 logging.basicConfig(level=LOG_LEVEL, filename=LOG_FILE, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+
+IGNORED_ALERT_IDS = ['23504', '23505']
 
 # Read arguments - See https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/
 alert_file = sys.argv[1]
 user = sys.argv[2].split(":")[0]
 hook_url = sys.argv[3]
 
-logging.debug(f'Custom-Discord Initialized. Alert file: {alert_file}, User: {user}, Hook URL: {hook_url}')
+logging.debug(f'Custom-Discord Initialized. '
+              f'Alert file: {alert_file}, '
+              f'User: {user}, '
+              f'Hook URL: {"HIDDEN" if LOG_HIDE_WEBHOOK_URL else hook_url}')
+
 logging.debug(f'Loaded Handlers: {[cls.__name__ for cls in rule_handlers.get_all_handlers()]}')
 
 # Read JSON data from the alert file.
@@ -38,11 +45,15 @@ alert_level = alert_json["rule"]["level"]
 
 logging.info(f'Loading Alert ID {alert_id} with level {alert_level}.')
 
+if alert_id in IGNORED_ALERT_IDS:
+    logging.info(f'Alert ID {alert_id} is explicitly ignored.')
+    sys.exit(0)
+
 # Determine which agent caused the alert.
 if "agentless" in alert_json:
-    agent_ = "agentless"
+    agent = "agentless"
 else:
-    agent_ = alert_json["agent"]["name"]
+    agent = f'Name: {alert_json["agent"]["name"]}\nID: {alert_json["agent"]["id"]}\nIP: {alert_json["agent"]["ip"]}'
 
 # Colors from https://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812
 # Aligned with Wazuh UI color coding.
@@ -62,7 +73,7 @@ else:
 fields = [
     {
         "name": "Agent",
-        "value": agent_,
+        "value": agent,
         "inline": True
     }, {
         "name": "Level",
