@@ -20,6 +20,10 @@ class VulnDetectCVEHandler(BaseHandler):
         cve_field["name"] = "CVE"
         cve_field["value"] = self.alert_data["data"]["vulnerability"]["cve"]
 
+        package_field = deepcopy(self.base_field)
+        package_field["name"] = "Package"
+        package_field["value"] = self.alert_data['data']['vulnerability']['package']['name']
+
         score_field = deepcopy(self.base_field)
         score_field["name"] = "Score"
         score_field["value"] = self.alert_data["data"]["vulnerability"]["score"]["base"]
@@ -37,18 +41,20 @@ class VulnDetectCVEHandler(BaseHandler):
         references = self._format_references(self.alert_data["data"]["vulnerability"]["reference"])
         reference_field["value"] = references
 
-        return [cve_field, score_field, status_field, rationale_field, reference_field]
+        return [cve_field, package_field, score_field, status_field, rationale_field, reference_field]
 
     def generate_description(self) -> Union[str, None]:
         return (f"{self.alert_data['data']['vulnerability']['cve']} "
                 f"with severity {self.alert_data['data']['vulnerability']['severity']} "
-                f"impacts package {self.alert_data['data']['vulnerability']['package']['name']}. "
-                f"\nRationale: {self.alert_data['data']['vulnerability']['rationale']}")
+                f"impacts package {self.alert_data['data']['vulnerability']['package']['name']}.")
 
     @staticmethod
     def _format_references(references: str) -> str:
         """ Reformats the references entry into a bulleted list. """
         if ',' in references:
-            return '- ' + '- '.join(references.split(', '))
+            if len(references.split(', ')) < 3:
+                return '- ' + '\n- '.join(references.split(', ')[:2]) + '\n- References truncated to 3.'
+            else:
+                return '- ' + '\n- '.join(references.split(', '))
         else:
             return '- ' + references
