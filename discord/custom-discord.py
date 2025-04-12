@@ -70,7 +70,8 @@ if alert_id in IGNORED_ALERT_IDS:
 if "agentless" in alert_json:
     agent = "agentless"
 else:
-    agent = f'Name: {alert_json["agent"]["name"]}\nID: {alert_json["agent"]["id"]}\nIP: {alert_json["agent"]["ip"]}'
+    agent_data = alert_json["agent"]
+    agent = f'Name: {agent_data.get("name", "Unavailable")}\nID: {agent_data.get("id", "Unavailable")}\nIP: {agent_data.get("ip", "Unavailable")}'
 
 # Colors from https://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812
 # Aligned with Wazuh UI color coding.
