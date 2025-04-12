@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Union
 from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
@@ -23,6 +23,10 @@ class PromiscInterfaceHandler(BaseHandler):
         interface_field["value"] = self.extract_device_name(self.alert_data['full_log'])
 
         return [interface_field]
+
+    def generate_description(self) -> Union[str, None]:
+        """ Default description is acceptably specific. """
+        return None
 
     @staticmethod
     def extract_device_name(log_string: str) -> str:
