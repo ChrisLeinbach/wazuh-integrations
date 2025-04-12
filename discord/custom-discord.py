@@ -6,15 +6,6 @@ import json
 import rule_handlers
 import logging
 
-"""
-ossec.conf configuration structure
- <integration>
-     <name>custom-discord</name>
-     <hook_url>https://discord.com/api/webhooks/XXXXXXXXXXX</hook_url>
-     <alert_format>json</alert_format>
- </integration>
-"""
-
 LOG_LEVEL = logging.DEBUG
 LOG_FILE = '/var/ossec/logs/custom-discord.log'
 LOG_HIDE_WEBHOOK_URL = False
