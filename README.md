@@ -4,12 +4,39 @@ This repository holds a custom Wazuh integration for Discord that allows you to 
 
 ## Installation
 
+To install the code integration itself, use the following commands:
+
 ```
 git clone https://github.com/ChrisLeinbach/wazuh-integrations.git
 cp -r wazuh-integrations/discord/* /var/ossec/integrations/
 chmod -R 750 /var/ossec/integrations/*
 chown -R root:wazuh /var/ossec/integrations/*
 systemctl restart wazuh-manager
+```
+
+The integration then needs Discord and Wazuh setup to use it. It's best to follow Maik Ro's blog post on this:
+
+[How to connect wazuh and discord: a Step-By-Step Guide. By Maik Ro.](https://maikroservice.com/how-to-connect-wazuh-and-discord-a-step-by-step-guide)
+
+There is some addition customization that can be done using these integrations. See the following section for
+additional configuration options and an example config block.
+
+## Additional Configuration Options
+
+Additional customization is done via the options field of the config XML block. This field supports standard JSON.
+
+Available JSON Fields:
+* ignored_alert_ids: A list of alert IDs as strings to ignore. Ex.  ```"ignored_alert_ids": ["23504", "23505"]```
+
+### Example Config
+```
+  <integration>
+    <name>custom-discord</name>
+    <hook_url>https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXX</hook_url>
+    <level>8</level>
+    <alert_format>json</alert_format>
+    <options>{"ignored_alert_ids": ["23504", "23505"]}</options>
+  </integration
 ```
 
 ## Handler Development
