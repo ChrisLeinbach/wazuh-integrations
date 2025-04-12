@@ -6,7 +6,7 @@ from rule_handlers.base_handler import BaseHandler
 class PAMHandler(BaseHandler):
 
     """
-    PAMHandler handles alerts where events from PAM, the Linux authentication manager.
+    PAMHandler handles alerts events from PAM, the Linux authentication manager.
     """
 
     alert_ids = ['5501', '5502']
