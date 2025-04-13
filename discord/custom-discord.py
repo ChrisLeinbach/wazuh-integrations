@@ -100,10 +100,13 @@ logging.debug(f'Matched Handlers: {matched_handlers}')
 descriptions = []
 for handler in matched_handlers:
     if handler.enabled:
-        fields.extend(handler.generate_fields())
-        description = handler.generate_description()
-        if description:
-            descriptions.append(description)
+        try:
+            fields.extend(handler.generate_fields())
+            description = handler.generate_description()
+            if description:
+                descriptions.append(description)
+        except Exception as e:
+            logging.error(f"Handler {handler} raised an exception on execution. {e}")
     else:
         logging.debug(f'Handler {handler} disabled.')
 
