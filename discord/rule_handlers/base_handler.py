@@ -1,4 +1,5 @@
-from typing import List, Union
+from typing import List, Union, Dict
+from copy import deepcopy
 
 
 class BaseHandler:
@@ -38,6 +39,13 @@ class BaseHandler:
 
     def __str__(self):
         return self.__class__.__name__
+
+    def _create_new_field(self, field_name: str, field_value: str) -> Dict[str, Union[str, bool]]:
+        """ Returns a Discord field dictionary with the name, value, and defaults from base_field set. """
+        new_field = deepcopy(self.base_field)
+        new_field["name"] = field_name
+        new_field["value"] = field_value
+        return new_field
 
     def generate_fields(self) -> List[dict]:
         """ Returns a list of dictionary field elements for discord. These should follow the form of base_field. """

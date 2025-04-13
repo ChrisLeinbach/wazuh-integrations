@@ -1,5 +1,4 @@
 from typing import List, Union
-from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
 
@@ -19,22 +18,11 @@ class PAMHandler(BaseHandler):
         fields = []
 
         if 'srcuser' in self.alert_data['data'].keys():
-            src_user_field = deepcopy(self.base_field)
-            src_user_field["name"] = "Source User"
-            src_user_field["value"] = self.alert_data['data']["srcuser"]
-            fields.append(src_user_field)
-
+            fields.append(self._create_new_field("Source User", self.alert_data['data']["srcuser"]))
         if 'uid' in self.alert_data['data'].keys():
-            uid_field = deepcopy(self.base_field)
-            uid_field["name"] = "UID"
-            uid_field["value"] = self.alert_data['data']["uid"]
-            fields.append(uid_field)
-
+            fields.append(self._create_new_field("UID", self.alert_data['data']["uid"]))
         if 'dstuser' in self.alert_data['data'].keys():
-            dst_user_field = deepcopy(self.base_field)
-            dst_user_field["name"] = "Destination User"
-            dst_user_field["value"] = self.alert_data['data']["dstuser"]
-            fields.append(dst_user_field)
+            fields.append(self._create_new_field("Destination User", self.alert_data['data']["dstuser"]))
 
         return fields
 

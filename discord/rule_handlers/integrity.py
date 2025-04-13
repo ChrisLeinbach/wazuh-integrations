@@ -1,5 +1,4 @@
 from typing import List, Union
-from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
 
@@ -17,18 +16,9 @@ class IntegrityHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        file_field = deepcopy(self.base_field)
-        file_field["name"] = "Path"
-        file_field["value"] = self.alert_data["syscheck"]["path"]
-
-        event_field = deepcopy(self.base_field)
-        event_field["name"] = "Event Type"
-        event_field["value"] = self.alert_data["syscheck"]["event"].capitalize()
-
-        attr_field = deepcopy(self.base_field)
-        attr_field["name"] = "Changed Attributes"
-        attr_field["value"] = ", ".join(self.alert_data["syscheck"]["changed_attributes"])
-
+        file_field = self._create_new_field("Path", self.alert_data["syscheck"]["path"])
+        event_field = self._create_new_field("Event Type", self.alert_data["syscheck"]["event"].capitalize())
+        attr_field = self._create_new_field("Changed Attributes", ", ".join(self.alert_data["syscheck"]["changed_attributes"]))
         return [file_field, event_field, attr_field]
 
     def generate_description(self) -> Union[str, None]:

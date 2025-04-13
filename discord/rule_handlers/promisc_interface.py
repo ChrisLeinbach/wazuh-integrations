@@ -1,6 +1,5 @@
 import re
 from typing import List, Union
-from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
 
@@ -17,11 +16,7 @@ class PromiscInterfaceHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-
-        interface_field = deepcopy(self.base_field)
-        interface_field["name"] = "Interface"
-        interface_field["value"] = self.extract_device_name(self.alert_data['full_log'])
-
+        interface_field = self._create_new_field("Interface", self.extract_device_name(self.alert_data['full_log']))
         return [interface_field]
 
     def generate_description(self) -> Union[str, None]:

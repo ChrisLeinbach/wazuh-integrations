@@ -1,5 +1,4 @@
 from typing import List, Union
-from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
 
@@ -16,31 +15,12 @@ class VulnDetectCVEHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        cve_field = deepcopy(self.base_field)
-        cve_field["name"] = "CVE"
-        cve_field["value"] = self.alert_data["data"]["vulnerability"]["cve"]
-
-        package_field = deepcopy(self.base_field)
-        package_field["name"] = "Package"
-        package_field["value"] = self.alert_data['data']['vulnerability']['package']['name']
-
-        score_field = deepcopy(self.base_field)
-        score_field["name"] = "Score"
-        score_field["value"] = self.alert_data["data"]["vulnerability"]["score"]["base"]
-
-        status_field = deepcopy(self.base_field)
-        status_field["name"] = "Status"
-        status_field["value"] = self.alert_data["data"]["vulnerability"]["status"]
-
-        rationale_field = deepcopy(self.base_field)
-        rationale_field["name"] = "Rationale"
-        rationale_field["value"] = self.alert_data["data"]["vulnerability"]["rationale"]
-
-        reference_field = deepcopy(self.base_field)
-        reference_field["name"] = "Reference"
-        references = self._format_references(self.alert_data["data"]["vulnerability"]["reference"])
-        reference_field["value"] = references
-
+        cve_field = self._create_new_field("CVE", self.alert_data["data"]["vulnerability"]["cve"])
+        package_field = self._create_new_field("Package", self.alert_data['data']['vulnerability']['package']['name'])
+        score_field = self._create_new_field("Score", self.alert_data["data"]["vulnerability"]["score"]["base"])
+        status_field = self._create_new_field("Status", self.alert_data["data"]["vulnerability"]["status"])
+        rationale_field = self._create_new_field("Rationale", self.alert_data["data"]["vulnerability"]["rationale"])
+        reference_field = self._create_new_field("Reference", self._format_references(self.alert_data["data"]["vulnerability"]["reference"]))
         return [cve_field, package_field, score_field, status_field, rationale_field, reference_field]
 
     def generate_description(self) -> Union[str, None]:

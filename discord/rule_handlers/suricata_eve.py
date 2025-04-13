@@ -1,5 +1,4 @@
 from typing import List, Union
-from copy import deepcopy
 from rule_handlers.base_handler import BaseHandler
 
 
@@ -16,54 +15,35 @@ class SuricataEve(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        sig_field = deepcopy(self.base_field)
-        sig_field["name"] = "Signature"
-        sig_field["value"] = self.alert_data["data"]["alert"]["signature_id"]
-
-        action_field = deepcopy(self.base_field)
-        action_field["name"] = "Action"
-        action_field["value"] = self.alert_data["data"]["alert"]["action"].capitalize()
-
-        severity_field = deepcopy(self.base_field)
-        severity_field["name"] = "Severity"
-        severity_field["value"] = self.alert_data["data"]["alert"]["severity"]
-
-        protocol = self.alert_data["data"]["proto"]
-        source_ip = self.alert_data["data"]["flow"]["src_ip"]
-        source_port = self.alert_data["data"]["flow"]["src_port"]
-        dest_ip = self.alert_data["data"]["flow"]["dest_ip"]
-        dest_port = self.alert_data["data"]["flow"]["dest_port"]
-
-        conversation_field = deepcopy(self.base_field)
-        conversation_field["name"] = "Conversation"
-        conversation_field["value"] = f"{protocol} {source_ip}:{source_port} -> {dest_ip}:{dest_port}"
-
+        sig_field = self._create_new_field("Signature", self.alert_data["data"]["alert"]["signature_id"])
+        action_field = self._create_new_field("Action", self.alert_data["data"]["alert"]["action"].capitalize())
+        severity_field = self._create_new_field("Severity", self.alert_data["data"]["alert"]["severity"])
+        conversation_field = self._create_new_field("Conversation", self.create_conversation_string())
         alert_data = [sig_field, action_field, severity_field, conversation_field]
 
         if "http" in self.alert_data["data"].keys():
-            http_host_field = deepcopy(self.base_field)
-            http_host_field["name"] = "HTTP Address"
             hostname = self.alert_data["data"]["http"]["hostname"]
             url = self.alert_data["data"]["http"]["url"]
-            http_host_field["value"] = f"{hostname}{url}"
-            alert_data.append(http_host_field)
+            alert_data.append(self._create_new_field("HTTP Address", f"{hostname}{url}"))
 
         if 'tls' in self.alert_data["data"].keys():
-            tls_sni_field = deepcopy(self.base_field)
-            tls_sni_field["name"] = "TLS SNI"
             tls_sni = self.alert_data["data"]["tls"]["sni"]
-            tls_sni_field["value"] = f"{tls_sni}"
-            alert_data.append(tls_sni_field)
+            alert_data.append(self._create_new_field("TLS SNI", f"{tls_sni}"))
 
         if 'dns' in self.alert_data["data"].keys():
-            dns_query_field = deepcopy(self.base_field)
-            dns_query_field["name"] = "DNS Query"
             dns_query = self.alert_data["data"]["dns"]["query"]["rrname"]
-            dns_query_field["value"] = f"{dns_query}"
-            alert_data.append(dns_query_field)
+            alert_data.append(self._create_new_field("DNS Query", f"{dns_query}"))
 
         return alert_data
 
     def generate_description(self) -> Union[str, None]:
         """ Default description is acceptably specific. """
         return None
+
+    def create_conversation_string(self):
+        protocol = self.alert_data["data"]["proto"]
+        source_ip = self.alert_data["data"]["flow"]["src_ip"]
+        source_port = self.alert_data["data"]["flow"]["src_port"]
+        dest_ip = self.alert_data["data"]["flow"]["dest_ip"]
+        dest_port = self.alert_data["data"]["flow"]["dest_port"]
+        return f"{protocol} {source_ip}:{source_port} -> {dest_ip}:{dest_port}"
