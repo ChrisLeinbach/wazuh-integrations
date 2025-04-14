@@ -1,0 +1,7 @@
+[
+    {"name": "Signature", "value": "2047122", "inline": true},
+    {"name": "Action", "value": "Allowed", "inline": true},
+    {"name": "Severity", "value": "3", "inline": true},
+    {"name": "Conversation", "value": "UDP 192.168.99.99:42706 -> 192.168.1.1:53", "inline": true},
+    {"name": "DNS Query", "value": "region2.v2.argotunnel.com", "inline": true}
+]
