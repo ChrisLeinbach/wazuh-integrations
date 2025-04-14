@@ -1,0 +1,95 @@
+{
+  "timestamp": "2025-04-14T17:00:35.284+0000",
+  "rule": {
+    "level": 3,
+    "description": "Suricata: Alert - ET INFO DNS Query to Cloudflare Tunneling Domain (argotunnel .com)",
+    "id": "86601",
+    "firedtimes": 15,
+    "mail": false,
+    "groups": [
+      "ids",
+      "suricata"
+    ]
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "id": "1744650035.177892",
+  "decoder": {
+    "name": "json"
+  },
+  "data": {
+    "timestamp": "2025-04-14T13:00:34.104729-0400",
+    "flow_id": "731285253791994.000000",
+    "in_iface": "igc1",
+    "event_type": "alert",
+    "src_ip": "192.168.99.99",
+    "src_port": "42706",
+    "dest_ip": "192.168.1.1",
+    "dest_port": "53",
+    "proto": "UDP",
+    "pkt_src": "wire/pcap",
+    "tx_id": "0",
+    "alert": {
+      "action": "allowed",
+      "gid": "1",
+      "signature_id": "2047122",
+      "rev": "1",
+      "signature": "ET INFO DNS Query to Cloudflare Tunneling Domain (argotunnel .com)",
+      "category": "Misc activity",
+      "severity": "3",
+      "metadata": {
+        "attack_target": [
+          "Client_Endpoint"
+        ],
+        "confidence": [
+          "High"
+        ],
+        "created_at": [
+          "2023_08_09"
+        ],
+        "deployment": [
+          "Perimeter"
+        ],
+        "signature_severity": [
+          "Informational"
+        ],
+        "updated_at": [
+          "2023_08_09"
+        ]
+      }
+    },
+    "dns": {
+      "version": "2",
+      "query": [
+        {
+          "type": "query",
+          "id": 26738,
+          "rrname": "region2.v2.argotunnel.com",
+          "rrtype": "A",
+          "tx_id": 0,
+          "opcode": 0
+        }
+      ]
+    },
+    "app_proto": "dns",
+    "direction": "to_server",
+    "flow": {
+      "pkts_toserver": "1",
+      "pkts_toclient": "0",
+      "bytes_toserver": "96",
+      "bytes_toclient": "0",
+      "start": "2025-04-14T13:00:34.104729-0400",
+      "src_ip": "192.168.99.99",
+      "dest_ip": "192.168.1.1",
+      "src_port": "42706",
+      "dest_port": "53"
+    }
+  },
+  "location": "/var/log/suricata/eve.json"
+}
