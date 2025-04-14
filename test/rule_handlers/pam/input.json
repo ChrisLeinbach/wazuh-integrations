@@ -1,0 +1,79 @@
+{
+  "predecoder": {
+    "hostname": "wazuh",
+    "program_name": "sudo",
+    "timestamp": "Apr 14 17:23:39"
+  },
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "data": {
+    "srcuser": "chris",
+    "uid": "1000",
+    "dstuser": "root(uid=0)"
+  },
+  "rule": {
+    "mail": false,
+    "level": 3,
+    "pci_dss": [
+      "10.2.5"
+    ],
+    "hipaa": [
+      "164.312.b"
+    ],
+    "tsc": [
+      "CC6.8",
+      "CC7.2",
+      "CC7.3"
+    ],
+    "description": "PAM: Login session opened.",
+    "groups": [
+      "pam",
+      "syslog",
+      "authentication_success"
+    ],
+    "nist_800_53": [
+      "AU.14",
+      "AC.7"
+    ],
+    "gdpr": [
+      "IV_32.2"
+    ],
+    "firedtimes": 2,
+    "mitre": {
+      "technique": [
+        "Valid Accounts"
+      ],
+      "id": [
+        "T1078"
+      ],
+      "tactic": [
+        "Defense Evasion",
+        "Persistence",
+        "Privilege Escalation",
+        "Initial Access"
+      ]
+    },
+    "id": "5501",
+    "gpg13": [
+      "7.8",
+      "7.9"
+    ]
+  },
+  "location": "journald",
+  "decoder": {
+    "parent": "pam",
+    "name": "pam"
+  },
+  "id": "1744651421.221418",
+  "full_log": "Apr 14 17:23:39 wazuh sudo[559471]: pam_unix(sudo:session): session opened for user root(uid=0) by chris(uid=1000)",
+  "timestamp": "2025-04-14T17:23:41.779+0000"
+}
