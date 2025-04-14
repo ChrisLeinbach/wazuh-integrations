@@ -1,3 +1,7 @@
+depedencies = [
+    "requests"
+]
+
 [tool.pytest.ini_options]
 pythonpath = [
   "./discord/"
