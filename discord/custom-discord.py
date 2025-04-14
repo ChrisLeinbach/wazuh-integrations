@@ -106,7 +106,8 @@ for handler in matched_handlers:
             if description:
                 descriptions.append(description)
         except Exception as e:
-            logging.error(f"Handler {handler} raised an exception on execution. {e}")
+            logging.error(f"Handler {handler} raised an exception on execution. {e}", exc_info=True)
+            logging.debug(f"The above exception was caused while processing the following alert data: {json.dumps(alert_json)}")
     else:
         logging.debug(f'Handler {handler} disabled.')
 
