@@ -45,16 +45,17 @@ else:
 
 # Read options. This may require a more intelligent implementation if we add more options but for now this is
 # an acceptable approach.
-IGNORED_ALERT_IDS = options_json.get('ignored_alert_ids', [])
+IGNORED_RULE_IDS = options_json.get('ignored_rule_ids', [])
 
 # Extract alert level and ID from the alert.
-alert_id = alert_json['rule']['id']
+alert_id = alert_json['id']
+rule_id = alert_json['rule']['id']
 alert_level = alert_json["rule"]["level"]
 
-logging.info(f'Loading Alert ID {alert_id} with level {alert_level}.')
+logging.info(f'Loading Alert ID {alert_id} with Rule ID {rule_id} with level {alert_level}.')
 
-if alert_id in IGNORED_ALERT_IDS:
-    logging.info(f'Alert ID {alert_id} is explicitly ignored.')
+if rule_id in IGNORED_RULE_IDS:
+    logging.info(f'Rule ID {rule_id} is explicitly ignored.')
     sys.exit(0)
 
 # Determine which agent caused the alert.
@@ -87,7 +88,11 @@ fields = [
         "value": agent,
         "inline": True
     }, {
-        "name": "Level",
+        "name": "Alert ID",
+        "value": alert_id,
+        "inline": True
+    }, {
+        "name": "Alert Level",
         "value": alert_level,
         "inline": True
     }
@@ -95,7 +100,7 @@ fields = [
 
 # Load the rule handlers. Iterate over the handlers and check if the alert ID matches on any of them.
 # If there is a match, generate the fields and description(s) for that handler.
-matched_handlers = [handler_class(alert_json) for handler_class in rule_handlers.get_all_handlers() if alert_id in handler_class.alert_ids]
+matched_handlers = [handler_class(alert_json) for handler_class in rule_handlers.get_all_handlers() if rule_id in handler_class.rule_ids]
 logging.debug(f'Matched Handlers: {matched_handlers}')
 descriptions = []
 for handler in matched_handlers:
@@ -131,14 +136,14 @@ payload = json.dumps({
     ]
 })
 
-logging.info(f'Sending webhook for alert {alert_id}.')
+logging.info(f'Sending webhook for alert {alert_id} with Rule ID {rule_id}.')
 r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"})
 
 if r.ok:
-    logging.info(f'Webhook sent successfully for alert {alert_id}.')
+    logging.info(f'Webhook sent successfully for alert {alert_id} with Rule ID {rule_id}.')
     sys.exit(0)
 else:
-    logging.info(f'Failed to send webhook for alert {alert_id}. Status Code {r.status_code}.')
+    logging.info(f'Failed to send webhook for alert {alert_id} with Rule ID {rule_id}. Status Code {r.status_code}.')
     logging.debug(f"Response from Discord: {r.text}")
     logging.debug(f"Attempted Payload: {json.dumps(payload)}")
     sys.exit(1)

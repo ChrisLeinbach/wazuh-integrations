@@ -6,7 +6,7 @@ class BaseHandler:
 
     """
     BaseHandler is the base class for all handlers. Handlers should extend it and override the several things:
-    - alert_ids: Should be a list of string alert IDs that the handler can parse.
+    - rule_ids: Should be a list of string rule IDs that the handler can parse.
     - enabled: A boolean indicating if the handler should be enabled.
     - generate_fields(): A function that generates fields for the Discord embed.
     - generate_description(): A function that generates description for the Discord content.
@@ -20,7 +20,7 @@ class BaseHandler:
     """
 
     # Subclasses should overload this list of IDs with a list of rule IDs they can handle. IDs are strings.
-    alert_ids = ['0']
+    rule_ids = ['0']
 
     # Subclasses should overload this to allow them to be turned on/off as needed.
     enabled = True

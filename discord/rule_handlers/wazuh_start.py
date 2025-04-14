@@ -9,7 +9,7 @@ class WazuhStartHandler(BaseHandler):
     minimum viable product handler that is triggered by restarting manager with systemd.
     """
 
-    alert_ids = ['502']
+    rule_ids = ['502']
     enabled = True
 
     def __init__(self, alert_data: dict):

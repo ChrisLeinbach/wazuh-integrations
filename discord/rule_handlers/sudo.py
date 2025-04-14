@@ -8,7 +8,7 @@ class SudoHandler(BaseHandler):
     SudoHandler handles alerts events from the use of the sudo command.
     """
 
-    alert_ids = ['5402']
+    rule_ids = ['5402']
     enabled = True
 
     def __init__(self, alert_data: dict):

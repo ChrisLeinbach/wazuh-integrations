@@ -8,7 +8,7 @@ class PAMHandler(BaseHandler):
     PAMHandler handles alerts events from PAM, the Linux authentication manager.
     """
 
-    alert_ids = ['5501', '5502']
+    rule_ids = ['5501', '5502']
     enabled = True
 
     def __init__(self, alert_data: dict):

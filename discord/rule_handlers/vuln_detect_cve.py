@@ -8,7 +8,7 @@ class VulnDetectCVEHandler(BaseHandler):
     VulnDetectCVEHandler handles alerts where a new CVE is detected by Wazuh.
     """
 
-    alert_ids = ['23504', '23505', '23506']
+    rule_ids = ['23504', '23505', '23506']
     enabled = True
 
     def __init__(self, alert_data: dict):

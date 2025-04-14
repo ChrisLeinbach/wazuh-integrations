@@ -8,7 +8,7 @@ class NetstatPortHandler(BaseHandler):
     NetstatPortHandler handles alerts where Wazuh has detected that the listening ports listed by Netstat have changed.
     """
 
-    alert_ids = ['533']
+    rule_ids = ['533']
     enabled = True
 
     def __init__(self, alert_data: dict):

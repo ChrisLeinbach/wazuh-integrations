@@ -8,7 +8,7 @@ class DpkgHandler(BaseHandler):
     DpkgHandler handles alerts ID 2902 and 2904 which is the Wazuh notifying of changes via DPKG.
     """
 
-    alert_ids = ['2902', '2904']
+    rule_ids = ['2902', '2904']
     enabled = True
 
     def __init__(self, alert_data: dict):
