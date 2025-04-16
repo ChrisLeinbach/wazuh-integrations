@@ -1,0 +1,8 @@
+[
+  {"inline": true, "name": "CVE", "value": "CVE-2017-13716"},
+  {"inline": true, "name": "Package", "value": "libsframe1"},
+  {"inline": true, "name": "Score", "value": "5.500000"},
+  {"inline": true, "name": "Status", "value": "Active"},
+  {"inline": true, "name": "Rationale", "value": "The C++ symbol demangler routine in cplus-dem.c in libiberty, asdistributed in GNU Binutils 2.29, allows remote attackers to cause a denialof service (excessive memory allocation and application crash) via acrafted file, as demonstrated by a call from the Binary File Descriptor(BFD) library (aka libbfd)."},
+  {"inline": true, "name": "Reference", "value": "- https://ubuntu.com/security/CVE-2017-13716\n- https://www.cve.org/CVERecord?id=CVE-2017-13716\n- References truncated to 3."}
+]

@@ -1,0 +1,49 @@
+{
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "rule": {
+    "firedtimes": 1,
+    "mail": false,
+    "level": 3,
+    "pci_dss": [
+      "10.6.1"
+    ],
+    "hipaa": [
+      "164.312.b"
+    ],
+    "tsc": [
+      "CC7.2",
+      "CC7.3"
+    ],
+    "description": "Wazuh server started.",
+    "groups": [
+      "ossec"
+    ],
+    "id": "502",
+    "nist_800_53": [
+      "AU.6"
+    ],
+    "gpg13": [
+      "10.1"
+    ],
+    "gdpr": [
+      "IV_35.7.d"
+    ]
+  },
+  "location": "wazuh-monitord",
+  "decoder": {
+    "name": "ossec"
+  },
+  "id": "1744746659.328949",
+  "full_log": "ossec: Manager started.",
+  "timestamp": "2025-04-15T19:50:59.898+0000"
+}

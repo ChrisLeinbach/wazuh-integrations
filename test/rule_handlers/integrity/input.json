@@ -1,0 +1,88 @@
+{
+  "syscheck": {
+    "uname_after": "root",
+    "mtime_after": "2025-04-14T18:33:57",
+    "size_after": "1093",
+    "gid_after": "0",
+    "mtime_before": "2025-04-14T06:33:57",
+    "mode": "scheduled",
+    "path": "/etc/hosts",
+    "sha1_after": "aa902c576a5abf9e27d8b4f21ca4955a0541d185",
+    "changed_attributes": [
+      "mtime"
+    ],
+    "gname_after": "root",
+    "uid_after": "0",
+    "perm_after": "rw-r--r--",
+    "event": "modified",
+    "md5_after": "3f389178d6084bd523600c126f73bd98",
+    "sha256_after": "18ec59cd97b24fca89856851d29d39999fd5fe5713eb556999541c3999d46690",
+    "inode_after": 2621796
+  },
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "rule": {
+    "mail": false,
+    "level": 7,
+    "pci_dss": [
+      "11.5"
+    ],
+    "hipaa": [
+      "164.312.c.1",
+      "164.312.c.2"
+    ],
+    "tsc": [
+      "PI1.4",
+      "PI1.5",
+      "CC6.1",
+      "CC6.8",
+      "CC7.2",
+      "CC7.3"
+    ],
+    "description": "Integrity checksum changed.",
+    "groups": [
+      "ossec",
+      "syscheck",
+      "syscheck_entry_modified",
+      "syscheck_file"
+    ],
+    "nist_800_53": [
+      "SI.7"
+    ],
+    "gdpr": [
+      "II_5.1.f"
+    ],
+    "firedtimes": 1,
+    "mitre": {
+      "technique": [
+        "Stored Data Manipulation"
+      ],
+      "id": [
+        "T1565.001"
+      ],
+      "tactic": [
+        "Impact"
+      ]
+    },
+    "id": "550",
+    "gpg13": [
+      "4.11"
+    ]
+  },
+  "location": "syscheck",
+  "decoder": {
+    "name": "syscheck_integrity_changed"
+  },
+  "id": "1744655772.237549",
+  "full_log": "File '/etc/hosts' modified\nMode: scheduled\nChanged attributes: mtime\nOld modification time was: '1744612437', now it is '1744655637'\n",
+  "timestamp": "2025-04-14T18:36:12.915+0000"
+}

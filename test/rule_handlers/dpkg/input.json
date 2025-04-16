@@ -1,0 +1,61 @@
+{
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "data": {
+    "dpkg_status": "status installed",
+    "package": "python3-venv",
+    "arch": "amd64",
+    "version": "3.12.3-0ubuntu2"
+  },
+  "rule": {
+    "firedtimes": 4,
+    "mail": false,
+    "level": 7,
+    "pci_dss": [
+      "10.6.1",
+      "10.2.7"
+    ],
+    "hipaa": [
+      "164.312.b"
+    ],
+    "tsc": [
+      "CC7.2",
+      "CC7.3",
+      "CC6.8",
+      "CC8.1"
+    ],
+    "description": "New dpkg (Debian Package) installed.",
+    "groups": [
+      "syslog",
+      "dpkg",
+      "config_changed"
+    ],
+    "id": "2902",
+    "nist_800_53": [
+      "AU.6",
+      "AU.14"
+    ],
+    "gpg13": [
+      "4.10"
+    ],
+    "gdpr": [
+      "IV_35.7.d"
+    ]
+  },
+  "location": "/var/log/dpkg.log",
+  "decoder": {
+    "name": "dpkg-decoder"
+  },
+  "id": "1744651425.226497",
+  "full_log": "2025-04-14 17:23:45 status installed python3-venv:amd64 3.12.3-0ubuntu2",
+  "timestamp": "2025-04-14T17:23:45.787+0000"
+}

@@ -9,7 +9,7 @@ class PromiscInterfaceHandler(BaseHandler):
     PromiscInterfaceHandler handles alerts where an interface has entered promiscuous mode.
     """
 
-    alert_ids = ['5104']
+    rule_ids = ['5104']
     enabled = True
 
     def __init__(self, alert_data: dict):

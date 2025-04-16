@@ -1,0 +1,5 @@
+[
+    {"inline": true, "name": "Package", "value": "python3-venv"},
+    {"inline": true, "name": "Architecture", "value": "amd64"},
+    {"inline": true, "name": "Version", "value": "3.12.3-0ubuntu2"}
+]

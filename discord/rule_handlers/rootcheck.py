@@ -8,7 +8,7 @@ class RootCheckHandler(BaseHandler):
     RootCheckHandler handles alert ID 510 which is the Wazuh attempting to identify root kits.
     """
 
-    alert_ids = ['510']
+    rule_ids = ['510']
     enabled = True
 
     def __init__(self, alert_data: dict):

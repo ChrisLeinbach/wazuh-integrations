@@ -9,7 +9,7 @@ class IntegrityHandler(BaseHandler):
     impact that file's integrity.
     """
 
-    alert_ids = ['550']
+    rule_ids = ['550']
     enabled = True
 
     def __init__(self, alert_data: dict):

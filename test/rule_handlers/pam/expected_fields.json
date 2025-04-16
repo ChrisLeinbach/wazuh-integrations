@@ -1,0 +1,5 @@
+[
+  {"inline": true, "name": "Source User", "value": "chris"},
+  {"inline": true, "name": "UID", "value": "1000"},
+  {"inline": true, "name": "Destination User", "value": "root(uid=0)"}
+]

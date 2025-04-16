@@ -1,0 +1,40 @@
+{
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "data": {
+    "title": "Files hidden inside directory '/boot/efi'."
+  },
+  "rule": {
+    "firedtimes": 4,
+    "mail": false,
+    "level": 7,
+    "pci_dss": [
+      "10.6.1"
+    ],
+    "description": "Host-based anomaly detection event (rootcheck).",
+    "groups": [
+      "ossec",
+      "rootcheck"
+    ],
+    "id": "510",
+    "gdpr": [
+      "IV_35.7.d"
+    ]
+  },
+  "location": "rootcheck",
+  "decoder": {
+    "name": "rootcheck"
+  },
+  "id": "1744819057.104349",
+  "full_log": "Files hidden inside directory '/boot/efi'. Link count does not match number of files (3,1).",
+  "timestamp": "2025-04-16T15:57:37.947+0000"
+}
