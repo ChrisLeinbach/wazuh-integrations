@@ -1,0 +1,81 @@
+{
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "data": {
+    "vulnerability": {
+      "severity": "Medium",
+      "package": {
+        "condition": "Package default status",
+        "name": "libsframe1",
+        "source": "binutils",
+        "version": "2.42-4ubuntu2.5",
+        "architecture": "amd64"
+      },
+      "assigner": "mitre",
+      "published": "2017-08-28T21:29:00Z",
+      "classification": "-",
+      "title": "CVE-2017-13716 affects libsframe1",
+      "type": "Packages",
+      "rationale": "The C++ symbol demangler routine in cplus-dem.c in libiberty, asdistributed in GNU Binutils 2.29, allows remote attackers to cause a denialof service (excessive memory allocation and application crash) via acrafted file, as demonstrated by a call from the Binary File Descriptor(BFD) library (aka libbfd).",
+      "reference": "https://ubuntu.com/security/CVE-2017-13716, https://www.cve.org/CVERecord?id=CVE-2017-13716",
+      "score": {
+        "version": "3.0",
+        "base": "5.500000"
+      },
+      "cve": "CVE-2017-13716",
+      "enumeration": "CVE",
+      "cvss": {
+        "cvss3": {
+          "base_score": "5.500000",
+          "vector": {
+            "user_interaction": "REQUIRED",
+            "integrity_impact": "NONE",
+            "scope": "UNCHANGED",
+            "availability": "HIGH",
+            "confidentiality_impact": "NONE",
+            "attack_vector": "LOCAL",
+            "privileges_required": "NONE"
+          }
+        }
+      },
+      "updated": "2024-11-21T03:11:29Z",
+      "status": "Active"
+    }
+  },
+  "rule": {
+    "firedtimes": 8,
+    "mail": false,
+    "level": 7,
+    "pci_dss": [
+      "11.2.1",
+      "11.2.3"
+    ],
+    "tsc": [
+      "CC7.1",
+      "CC7.2"
+    ],
+    "description": "CVE-2017-13716 affects libsframe1",
+    "groups": [
+      "vulnerability-detector"
+    ],
+    "id": "23504",
+    "gdpr": [
+      "IV_35.7.d"
+    ]
+  },
+  "location": "vulnerability-detector",
+  "decoder": {
+    "name": "json"
+  },
+  "id": "1744182095.304722",
+  "timestamp": "2025-04-09T07:01:35.641+0000"
+}

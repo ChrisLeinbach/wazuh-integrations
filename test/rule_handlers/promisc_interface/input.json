@@ -1,0 +1,72 @@
+{
+  "predecoder": {
+    "hostname": "services",
+    "program_name": "kernel",
+    "timestamp": "Apr 04 19:13:15"
+  },
+  "input": {
+    "type": "log"
+  },
+  "agent": {
+    "id": "003",
+    "name": "ExampleAgent",
+    "ip": "192.168.1.1"
+  },
+  "manager": {
+    "name": "wazuh"
+  },
+  "rule": {
+    "mail": false,
+    "level": 8,
+    "pci_dss": [
+      "10.6.1",
+      "11.4"
+    ],
+    "hipaa": [
+      "164.312.b"
+    ],
+    "tsc": [
+      "CC7.2",
+      "CC7.3",
+      "CC6.1",
+      "CC6.8"
+    ],
+    "description": "Interface entered in promiscuous(sniffing) mode.",
+    "groups": [
+      "syslog",
+      "linuxkernel",
+      "promisc"
+    ],
+    "nist_800_53": [
+      "AU.6",
+      "SI.4"
+    ],
+    "gdpr": [
+      "IV_35.7.d"
+    ],
+    "firedtimes": 7,
+    "mitre": {
+      "technique": [
+        "Network Sniffing"
+      ],
+      "id": [
+        "T1040"
+      ],
+      "tactic": [
+        "Credential Access",
+        "Discovery"
+      ]
+    },
+    "id": "5104",
+    "gpg13": [
+      "4.13"
+    ]
+  },
+  "location": "journald",
+  "decoder": {
+    "name": "kernel"
+  },
+  "id": "1743793995.319535",
+  "full_log": "Apr 04 19:13:15 services kernel: device veth9a081f0 entered promiscuous mode",
+  "timestamp": "2025-04-04T19:13:15.900+0000"
+}
