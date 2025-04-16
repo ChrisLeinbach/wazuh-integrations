@@ -50,13 +50,7 @@ def handler_case(request):
     }
 
 def test_generate_fields(handler_case):
-    if handler_case['handler'].__class__.__name__ == "PAMHandler":
-        expect = handler_case["handler"].generate_fields()
-        print()
     assert handler_case["handler"].generate_fields() == handler_case["expected_fields"]
 
 def test_generate_description(handler_case):
-    if handler_case['handler'].__class__.__name__ == "PAMHandler":
-        expect = handler_case["handler"].generate_description()
-        print()
     assert handler_case["handler"].generate_description() == handler_case["expected_description"]
