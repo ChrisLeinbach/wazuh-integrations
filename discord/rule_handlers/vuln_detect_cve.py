@@ -33,7 +33,7 @@ class VulnDetectCVEHandler(BaseHandler):
         """ Reformats the references entry into a bulleted list. """
         if ',' in references:
             if len(references.split(', ')) < 3:
-                return '- ' + '\n- '.join(references.split(', ')[:2]) + '\n- References truncated to 3.'
+                return '- ' + '\n- '.join(references.split(', ')[:3]) + '\n- References truncated to 3.'
             else:
                 return '- ' + '\n- '.join(references.split(', '))
         else:
