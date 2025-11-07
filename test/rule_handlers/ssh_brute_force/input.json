@@ -1,0 +1,81 @@
+{
+    "agent": {
+        "id": "003",
+        "name": "ExampleAgent",
+        "ip": "192.168.1.1"
+    },
+    "previous_output": "Nov 07 03:54:16 hostname sshd[59616]: Invalid user admin from 113.189.212.68 port 45757\nNov 07 03:54:07 hostname sshd[59614]: Disconnected from invalid user root 113.189.212.68 port 45653 [preauth]\nNov 07 03:53:58 hostname sshd[59612]: Disconnecting invalid user root 113.189.212.68 port 45545: Too many authentication failures [preauth]\nNov 07 03:53:48 hostname sshd[59610]: Disconnecting invalid user root 113.189.212.68 port 45438: Too many authentication failures [preauth]\nNov 07 03:53:38 hostname sshd[59608]: Disconnecting invalid user root 113.189.212.68 port 45321: Too many authentication failures [preauth]\nNov 07 03:53:27 hostname sshd[59606]: Disconnecting invalid user root 113.189.212.68 port 45215: Too many authentication failures [preauth]\nNov 07 03:53:18 hostname sshd[59600]: Disconnecting invalid user root 113.189.212.68 port 45098: Too many authentication failures [preauth]",
+    "data": {
+        "srcuser": "admin",
+        "srcip": "113.189.212.68",
+        "srcport": "45757"
+    },
+    "manager": {
+        "name": "wazuh"
+    },
+    "rule": {
+        "mail": false,
+        "level": 10,
+        "hipaa": [
+        "164.312.b"
+        ],
+        "pci_dss": [
+        "11.4",
+        "10.2.4",
+        "10.2.5"
+        ],
+        "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+        ],
+        "description": "sshd: brute force trying to get access to the system. Non existent user.",
+        "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failures"
+        ],
+        "nist_800_53": [
+        "SI.4",
+        "AU.14",
+        "AC.7"
+        ],
+        "frequency": 8,
+        "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+        ],
+        "firedtimes": 1,
+        "mitre": {
+        "technique": [
+            "Brute Force"
+        ],
+        "id": [
+            "T1110"
+        ],
+        "tactic": [
+            "Credential Access"
+        ]
+        },
+        "id": "5712"
+    },
+    "decoder": {
+        "parent": "sshd",
+        "name": "sshd"
+    },
+    "full_log": "Nov 07 03:54:17 hostname sshd[59616]: Disconnecting invalid user admin 113.189.212.68 port 45757: Too many authentication failures [preauth]",
+    "input": {
+        "type": "log"
+    },
+    "location": "journald",
+    "id": "1762487658.1117664",
+    "GeoLocation": {
+        "country_name": "Vietnam",
+        "location": {
+        "lon": 106,
+        "lat": 16
+        }
+    },
+    "timestamp": "2025-11-07T03:54:18.569+0000"
+}
