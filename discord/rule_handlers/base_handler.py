@@ -47,6 +47,18 @@ class BaseHandler:
         new_field["value"] = field_value
         return new_field
 
+    def make_geo_string(self, alert_data: dict) -> str:
+        """ Returns the GeoLocation data as a string formatted as city, region, country. Omits parts not set by Wazuh. """
+        geo_root = self.alert_data["GeoLocation"]
+
+        geo_parts = [
+            geo_root.get('city_name'),
+            geo_root.get('region_name'),
+            geo_root.get('country_name')
+        ]
+
+        return ", ".join(filter(None, geo_parts))
+
     def generate_fields(self) -> List[dict]:
         """ Returns a list of dictionary field elements for discord. These should follow the form of base_field. """
         raise NotImplementedError("Subclasses must implement this method.")

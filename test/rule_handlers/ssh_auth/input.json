@@ -1,0 +1,86 @@
+{
+    "predecoder": {
+      "hostname": "hostname",
+      "program_name": "sshd",
+      "timestamp": "Nov 10 13:20:18"
+    },
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "1192.168.1.1",
+      "name": "WazuhAgent",
+      "id": "003"
+    },
+    "data": {
+      "srcip": "104.248.200.136",
+      "dstuser": "root"
+    },
+    "manager": {
+      "name": "wazuh"
+    },
+    "rule": {
+      "mail": false,
+      "level": 5,
+      "hipaa": [
+        "164.312.b"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "sshd: Attempt to login using a denied user.",
+      "groups": [
+        "syslog",
+        "sshd",
+        "invalid_login"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "firedtimes": 5,
+      "mitre": {
+        "technique": [
+          "Brute Force"
+        ],
+        "id": [
+          "T1110"
+        ],
+        "tactic": [
+          "Credential Access"
+        ]
+      },
+      "id": "5718",
+      "gpg13": [
+        "7.1"
+      ]
+    },
+    "location": "journald",
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "id": "1762780819.312659",
+    "GeoLocation": {
+      "city_name": "Amsterdam",
+      "country_name": "Netherlands",
+      "region_name": "North Holland",
+      "location": {
+        "lon": 4.9392,
+        "lat": 52.352
+      }
+    },
+    "full_log": "Nov 10 13:20:18 hostname sshd[61878]: User root from 104.248.200.136 not allowed because not listed in AllowUsers",
+    "timestamp": "2025-11-10T13:20:19.089+0000"
+}

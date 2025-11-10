@@ -33,9 +33,9 @@ class SSHBruteForceHandler(BaseHandler):
         user_field = self._create_new_field("Users", ', '.join(sorted(users)))
         address_field = self._create_new_field("Sources", ', '.join(sorted(addresses)))
         attempts_field = self._create_new_field("Attempts", len(matches))
-        country_field = self._create_new_field("Origin", self.alert_data["GeoLocation"]["country_name"])
+        origin_field = self._create_new_field("Origin", self.make_geo_string(self.alert_data))
 
-        return [user_field, address_field, attempts_field, country_field]
+        return [user_field, address_field, attempts_field, origin_field]
 
     def generate_description(self) -> Union[str, None]:
         """ Default description is acceptably specific. """
