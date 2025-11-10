@@ -20,8 +20,8 @@ class SSHAuthAttemptsHandler(BaseHandler):
         event_data = self.alert_data['full_log']
         match = re.search(r"(?:invalid user )?(\S+) from ([0-9a-fA-F:.]+)", event_data)
 
-        user_field = self._create_new_field("User", match.group(1))
-        address_field = self._create_new_field("Source", match.group(2))
+        user_field = self.create_new_field("User", match.group(1))
+        address_field = self.create_new_field("Source", match.group(2))
 
         return [user_field, address_field]
 

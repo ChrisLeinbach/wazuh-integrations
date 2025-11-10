@@ -16,7 +16,7 @@ class PromiscInterfaceHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        interface_field = self._create_new_field("Interface", self.extract_device_name(self.alert_data['full_log']))
+        interface_field = self.create_new_field("Interface", self.extract_device_name(self.alert_data['full_log']))
         return [interface_field]
 
     def generate_description(self) -> Union[str, None]:

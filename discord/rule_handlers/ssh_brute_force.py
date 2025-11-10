@@ -30,10 +30,10 @@ class SSHBruteForceHandler(BaseHandler):
             users.add(user)
             addresses.add(address)
 
-        user_field = self._create_new_field("Users", ', '.join(sorted(users)))
-        address_field = self._create_new_field("Sources", ', '.join(sorted(addresses)))
-        attempts_field = self._create_new_field("Attempts", len(matches))
-        origin_field = self._create_new_field("Origin", self.make_geo_string(self.alert_data))
+        user_field = self.create_new_field("Users", ', '.join(sorted(users)))
+        address_field = self.create_new_field("Sources", ', '.join(sorted(addresses)))
+        attempts_field = self.create_new_field("Attempts", len(matches))
+        origin_field = self.create_new_field("Origin", self.make_geo_string())
 
         return [user_field, address_field, attempts_field, origin_field]
 

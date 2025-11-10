@@ -40,14 +40,14 @@ class BaseHandler:
     def __str__(self):
         return self.__class__.__name__
 
-    def _create_new_field(self, field_name: str, field_value: str) -> Dict[str, Union[str, bool]]:
+    def create_new_field(self, field_name: str, field_value: str) -> Dict[str, Union[str, bool]]:
         """ Returns a Discord field dictionary with the name, value, and defaults from base_field set. """
         new_field = deepcopy(self.base_field)
         new_field["name"] = field_name
         new_field["value"] = field_value
         return new_field
 
-    def make_geo_string(self, alert_data: dict) -> str:
+    def make_geo_string(self) -> str:
         """ Returns the GeoLocation data as a string formatted as city, region, country. Omits parts not set by Wazuh. """
         geo_root = self.alert_data["GeoLocation"]
 

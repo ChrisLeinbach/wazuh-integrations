@@ -18,11 +18,11 @@ class PAMHandler(BaseHandler):
         fields = []
 
         if 'srcuser' in self.alert_data['data'].keys():
-            fields.append(self._create_new_field("Source User", self.alert_data['data']["srcuser"]))
+            fields.append(self.create_new_field("Source User", self.alert_data['data']["srcuser"]))
         if 'uid' in self.alert_data['data'].keys():
-            fields.append(self._create_new_field("UID", self.alert_data['data']["uid"]))
+            fields.append(self.create_new_field("UID", self.alert_data['data']["uid"]))
         if 'dstuser' in self.alert_data['data'].keys():
-            fields.append(self._create_new_field("Destination User", self.alert_data['data']["dstuser"]))
+            fields.append(self.create_new_field("Destination User", self.alert_data['data']["dstuser"]))
 
         return fields
 

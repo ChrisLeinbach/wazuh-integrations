@@ -16,7 +16,7 @@ class WazuhStartHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        fired_field = self._create_new_field("Trigger Count", self.alert_data["rule"]["firedtimes"])
+        fired_field = self.create_new_field("Trigger Count", self.alert_data["rule"]["firedtimes"])
         return [fired_field]
 
     def generate_description(self) -> Union[str, None]:

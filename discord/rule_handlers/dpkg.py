@@ -15,9 +15,9 @@ class DpkgHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        package_field = self._create_new_field("Package", self.alert_data["data"]["package"])
-        arch_field = self._create_new_field("Architecture", self.alert_data["data"]["arch"])
-        version_field = self._create_new_field("Version", self.alert_data["data"]["version"])
+        package_field = self.create_new_field("Package", self.alert_data["data"]["package"])
+        arch_field = self.create_new_field("Architecture", self.alert_data["data"]["arch"])
+        version_field = self.create_new_field("Version", self.alert_data["data"]["version"])
         return [package_field, arch_field, version_field]
 
     def generate_description(self) -> Union[str, None]:

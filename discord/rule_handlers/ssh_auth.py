@@ -16,9 +16,9 @@ class SSHAuthHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        user_field = self._create_new_field("User", self.alert_data['data']['dstuser'])
-        ip_field = self._create_new_field("Source IP", self.alert_data['data']['srcip'])
-        origin_field = self._create_new_field("Origin", self.make_geo_string(self.alert_data))
+        user_field = self.create_new_field("User", self.alert_data['data']['dstuser'])
+        ip_field = self.create_new_field("Source IP", self.alert_data['data']['srcip'])
+        origin_field = self.create_new_field("Origin", self.make_geo_string())
         return [user_field, ip_field, origin_field]
 
     def generate_description(self) -> Union[str, None]:

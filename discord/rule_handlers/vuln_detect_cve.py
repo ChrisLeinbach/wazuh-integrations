@@ -15,12 +15,12 @@ class VulnDetectCVEHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        cve_field = self._create_new_field("CVE", self.alert_data["data"]["vulnerability"]["cve"])
-        package_field = self._create_new_field("Package", self.alert_data['data']['vulnerability']['package']['name'])
-        score_field = self._create_new_field("Score", self.alert_data["data"]["vulnerability"]["score"]["base"])
-        status_field = self._create_new_field("Status", self.alert_data["data"]["vulnerability"]["status"])
-        rationale_field = self._create_new_field("Rationale", self.alert_data["data"]["vulnerability"]["rationale"])
-        reference_field = self._create_new_field("Reference", self._format_references(self.alert_data["data"]["vulnerability"]["reference"]))
+        cve_field = self.create_new_field("CVE", self.alert_data["data"]["vulnerability"]["cve"])
+        package_field = self.create_new_field("Package", self.alert_data['data']['vulnerability']['package']['name'])
+        score_field = self.create_new_field("Score", self.alert_data["data"]["vulnerability"]["score"]["base"])
+        status_field = self.create_new_field("Status", self.alert_data["data"]["vulnerability"]["status"])
+        rationale_field = self.create_new_field("Rationale", self.alert_data["data"]["vulnerability"]["rationale"])
+        reference_field = self.create_new_field("Reference", self._format_references(self.alert_data["data"]["vulnerability"]["reference"]))
         return [cve_field, package_field, score_field, status_field, rationale_field, reference_field]
 
     def generate_description(self) -> Union[str, None]:
