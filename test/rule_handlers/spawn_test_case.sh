@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-default_test_data='null'
+default_test_data='[null]'
 
 script_directory=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
