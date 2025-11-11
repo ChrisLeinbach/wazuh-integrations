@@ -1,7 +1,29 @@
 [
-  {"inline": true, "name": "Source User", "value": "chris"},
-  {"inline": true, "name": "Destination User", "value": "root"},
-  {"inline": true, "name": "Command", "value": "./install.sh"},
-  {"inline": true, "name": "Working Directory", "value": "/home/chris/wazuh-integrations"},
-  {"inline": true, "name": "Terminal", "value": "pts/3"}
+  [
+    {
+      "inline": true,
+      "name": "Source User",
+      "value": "chris"
+    },
+    {
+      "inline": true,
+      "name": "Destination User",
+      "value": "root"
+    },
+    {
+      "inline": true,
+      "name": "Command",
+      "value": "./install.sh"
+    },
+    {
+      "inline": true,
+      "name": "Working Directory",
+      "value": "/home/chris/wazuh-integrations"
+    },
+    {
+      "inline": true,
+      "name": "Terminal",
+      "value": "pts/3"
+    }
+  ]
 ]

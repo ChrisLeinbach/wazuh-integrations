@@ -1,6 +1,24 @@
 [
-    {"inline": true, "name": "Users", "value": "admin, root"}, 
-    {"inline": true, "name": "Sources", "value": "113.189.212.68"}, 
-    {"inline": true, "name": "Attempts", "value": 7},
-    {"inline": true, "name": "Origin", "value": "Vietnam"}
+    [
+        {
+            "inline": true,
+            "name": "Users",
+            "value": "admin, root"
+        },
+        {
+            "inline": true,
+            "name": "Sources",
+            "value": "113.189.212.68"
+        },
+        {
+            "inline": true,
+            "name": "Attempts",
+            "value": 7
+        },
+        {
+            "inline": true,
+            "name": "Origin",
+            "value": "Vietnam"
+        }
+    ]
 ]

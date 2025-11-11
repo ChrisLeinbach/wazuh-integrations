@@ -1,3 +1,9 @@
 [
-  {"inline": true, "name": "Trigger Count", "value": 1}
+  [
+    {
+      "inline": true,
+      "name": "Trigger Count",
+      "value": 1
+    }
+  ]
 ]

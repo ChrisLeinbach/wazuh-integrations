@@ -1,5 +1,19 @@
 [
-  {"inline": true, "name": "Path", "value": "/etc/hosts"},
-  {"inline": true, "name": "Event Type", "value": "Modified"},
-  {"inline": true, "name": "Changed Attributes", "value": "mtime"}
+  [
+    {
+      "inline": true,
+      "name": "Path",
+      "value": "/etc/hosts"
+    },
+    {
+      "inline": true,
+      "name": "Event Type",
+      "value": "Modified"
+    },
+    {
+      "inline": true,
+      "name": "Changed Attributes",
+      "value": "mtime"
+    }
+  ]
 ]

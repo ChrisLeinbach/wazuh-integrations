@@ -1,3 +1,9 @@
 [
-  {"inline": true, "name": "Interface", "value": "veth9a081f0"}
+  [
+    {
+      "inline": true,
+      "name": "Interface",
+      "value": "veth9a081f0"
+    }
+  ]
 ]

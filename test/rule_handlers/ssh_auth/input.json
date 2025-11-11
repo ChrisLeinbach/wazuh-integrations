@@ -1,4 +1,5 @@
-{
+[
+  {
     "predecoder": {
       "hostname": "hostname",
       "program_name": "sshd",
@@ -83,4 +84,86 @@
     },
     "full_log": "Nov 10 13:20:18 hostname sshd[61878]: User root from 104.248.200.136 not allowed because not listed in AllowUsers",
     "timestamp": "2025-11-10T13:20:19.089+0000"
-}
+  },
+  {
+    "timestamp": "2025-11-11T19:38:34.783+0000",
+    "rule": {
+      "level": 5,
+      "description": "sshd: Attempt to login using a non-existent user",
+      "id": "5710",
+      "mitre": {
+        "id": [
+          "T1110.001",
+          "T1021.004"
+        ],
+        "tactic": [
+          "Credential Access",
+          "Lateral Movement"
+        ],
+        "technique": [
+          "Password Guessing",
+          "SSH"
+        ]
+      },
+      "firedtimes": 6,
+      "mail": false,
+      "groups": [
+        "syslog",
+        "sshd",
+        "authentication_failed",
+        "invalid_login"
+      ],
+      "gdpr": [
+        "IV_35.7.d",
+        "IV_32.2"
+      ],
+      "gpg13": [
+        "7.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "nist_800_53": [
+        "AU.14",
+        "AC.7",
+        "AU.6"
+      ],
+      "pci_dss": [
+        "10.2.4",
+        "10.2.5",
+        "10.6.1"
+      ],
+      "tsc": [
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "ip": "192.168.1.1",
+      "name": "WazuhAgent",
+      "id": "003"
+    },
+    "manager": {
+      "name": "wazuh"
+    },
+    "id": "1762889914.609352",
+    "full_log": "Nov 11 19:38:33 hostname sshd[71004]: Invalid user config from 27.79.0.118 port 40066",
+    "predecoder": {
+      "program_name": "sshd",
+      "timestamp": "Nov 11 19:38:33",
+      "hostname": "hostname"
+    },
+    "decoder": {
+      "parent": "sshd",
+      "name": "sshd"
+    },
+    "data": {
+      "srcip": "27.79.0.118",
+      "srcport": "40066",
+      "srcuser": "config"
+    },
+    "location": "journald"
+  }
+]
