@@ -49,7 +49,10 @@ class BaseHandler:
 
     def make_geo_string(self) -> str:
         """ Returns the GeoLocation data as a string formatted as city, region, country. Omits parts not set by Wazuh. """
-        geo_root = self.alert_data["GeoLocation"]
+        if 'GeoLocation' in self.alert_data.keys():
+            geo_root = self.alert_data["GeoLocation"]
+        else:
+            return "Not Available"
 
         geo_parts = [
             geo_root.get('city_name'),

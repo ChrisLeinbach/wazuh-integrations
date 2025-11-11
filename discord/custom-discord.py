@@ -111,8 +111,13 @@ for handler in matched_handlers:
             if description:
                 descriptions.append(description)
         except Exception as e:
-            logging.error(f"Handler {handler} raised an exception on execution. {e}", exc_info=True)
+            logging.error(f"Handler {handler} raised an exception on execution. {type(e).__name__}: {e}", exc_info=True)
             logging.debug(f"The above exception was caused while processing the following alert data: {json.dumps(alert_json)}")
+
+            # If a handler causes an exception, add the default description to ensure there it one and then
+            # add a warning message to the description.
+            descriptions.append(f"{alert_json['rule']['description']}")
+            descriptions.append(f"\nWARNING: Handler {handler} had an execution error. See logs ({LOG_FILE}) for details.")
     else:
         logging.debug(f'Handler {handler} disabled.')
 
