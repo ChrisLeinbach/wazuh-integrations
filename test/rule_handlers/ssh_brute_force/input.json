@@ -79,5 +79,95 @@
             }
         },
         "timestamp": "2025-11-07T03:54:18.569+0000"
+    },
+    {
+        "predecoder": {
+            "hostname": "hostname",
+            "program_name": "sshd",
+            "timestamp": "Nov 11 23:00:20"
+        },
+        "agent": {
+            "id": "003",
+            "name": "ExampleAgent",
+            "ip": "192.168.1.1"
+        },
+        "previous_output": "Nov 11 23:00:20 hostname sshd[71884]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:19 hostname sshd[71882]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:18 hostname sshd[71880]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:18 hostname sshd[71878]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:16 hostname sshd[71874]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:17 hostname sshd[71876]: User root from 164.92.241.60 not allowed because not listed in AllowUsers\nNov 11 23:00:16 hostname sshd[71868]: User root from 164.92.241.60 not allowed because not listed in AllowUsers",
+        "data": {
+            "srcip": "164.92.241.60",
+            "dstuser": "root"
+        },
+        "manager": {
+            "name": "wazuh"
+        },
+        "rule": {
+            "mail": false,
+            "level": 10,
+            "hipaa": [
+                "164.312.b"
+            ],
+            "pci_dss": [
+                "10.2.4",
+                "10.2.5",
+                "11.4"
+            ],
+            "tsc": [
+                "CC6.1",
+                "CC6.8",
+                "CC7.2",
+                "CC7.3"
+            ],
+            "description": "sshd: Multiple access attempts using a denied user.",
+            "groups": [
+                "syslog",
+                "sshd",
+                "invalid_login"
+            ],
+            "nist_800_53": [
+                "AU.14",
+                "AC.7",
+                "SI.4"
+            ],
+            "frequency": 8,
+            "gdpr": [
+                "IV_35.7.d",
+                "IV_32.2"
+            ],
+            "firedtimes": 1,
+            "mitre": {
+                "technique": [
+                    "Brute Force"
+                ],
+                "id": [
+                    "T1110"
+                ],
+                "tactic": [
+                    "Credential Access"
+                ]
+            },
+            "id": "5719",
+            "gpg13": [
+                "7.1"
+            ]
+        },
+        "decoder": {
+            "parent": "sshd",
+            "name": "sshd"
+        },
+        "full_log": "Nov 11 23:00:20 hostname sshd[71886]: User root from 164.92.241.60 not allowed because not listed in AllowUsers",
+        "input": {
+            "type": "log"
+        },
+        "location": "journald",
+        "id": "1762902021.721702",
+        "GeoLocation": {
+            "city_name": "Denver",
+            "country_name": "United States",
+            "region_name": "Colorado",
+            "location": {
+                "lon": -104.9815,
+                "lat": 39.7277
+            }
+        },
+        "timestamp": "2025-11-11T23:00:21.840+0000"
     }
 ]

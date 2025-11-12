@@ -6,33 +6,29 @@ from rule_handlers.base_handler import BaseHandler
 class SSHBruteForceHandler(BaseHandler):
 
     """
-    SSHBruteForceHandler handles alert ID 5712 which is Wazuh notifying about a brute force attempt via SSH.
+    SSHBruteForceHandler handles alert ID 5712 and 5719 which is Wazuh notifying about a brute force attempt via SSH.
     """
 
-    rule_ids = ['5712']
+    rule_ids = ['5712', '5719']
     enabled = True
 
     def __init__(self, alert_data: dict):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
-        event_data = self.alert_data['previous_output']
+        events = self.alert_data['previous_output'].split('\n')
 
-        pattern = re.compile(
-            r"(?:Invalid user|invalid user)\s+(\S+)\s+(?:from\s+)?([0-9a-fA-F:.]+)",
-            re.IGNORECASE
-        )
-        matches = pattern.findall(event_data)
-
+        ips = set()
         users = set()
-        addresses = set()
-        for user, address in matches:
+        for event in events:
+            user_ip_matches = re.compile(r"user\s+(\S+).*?\b([0-9a-fA-F:.]+)\b", re.IGNORECASE).search(event)
+            user, ip = user_ip_matches.groups()
+            ips.add(ip)
             users.add(user)
-            addresses.add(address)
 
         user_field = self.create_new_field("Users", ', '.join(sorted(users)))
-        address_field = self.create_new_field("Sources", ', '.join(sorted(addresses)))
-        attempts_field = self.create_new_field("Attempts", len(matches))
+        address_field = self.create_new_field("Sources", ', '.join(sorted(ips)))
+        attempts_field = self.create_new_field("Attempts", len(events))
         origin_field = self.create_new_field("Origin", self.make_geo_string())
 
         return [user_field, address_field, attempts_field, origin_field]
