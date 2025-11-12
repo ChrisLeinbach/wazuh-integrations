@@ -17,16 +17,19 @@ class SSHAuthHandler(BaseHandler):
         super().__init__(alert_data)
 
     def generate_fields(self) -> List[dict]:
+
+        # Attempt to use data Wazuh already extracted.
         if 'data' in self.alert_data.keys():
             user = self.alert_data['data'].get('dstuser') or self.alert_data['data'].get('srcuser')
-            src_ip = self.alert_data['data']['srcip']
-        else:
-            # Sometimes Wazuh doesn't extract this info, it appears this happens when 
-            # the invalid user is just a space or some other kind of null string.
+            src_ip = self.alert_data['data'].get('srcip') or self.alert_data['data'].get('dstip')
+
+        # Use regex as fallback for either field.
+        if not user or not src_ip:
+            pattern = re.compile(r"""(?:Invalid|Failed|User)\s+user?\s*(?:(\S+)\s+)?from\s+([0-9a-fA-F:.]+)""", re.IGNORECASE | re.VERBOSE)
             event_data = self.alert_data['full_log']
-            match = re.search(r"(?:invalid user )?(\S+) from ([0-9a-fA-F:.]+)", event_data)
-            user = match.group(1)
-            src_ip = match.group(2)
+            match = pattern.search(event_data)
+            user = match.group(1) if not user else user
+            src_ip = match.group(2) if not src_ip else src_ip
 
         user_field = self.create_new_field("User", user)
         ip_field = self.create_new_field("Source IP", src_ip)
