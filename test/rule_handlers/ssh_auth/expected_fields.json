@@ -49,5 +49,22 @@
             "name": "Origin",
             "value": "Not Available"
         }
+    ],
+    [
+        {
+            "inline": true,
+            "name": "User",
+            "value": "oracle"
+        },
+        {
+            "inline": true,
+            "name": "Source IP",
+            "value": "5.187.97.40"
+        },
+        {
+            "inline": true,
+            "name": "Origin",
+            "value": "Not Available"
+        }
     ]
 ]

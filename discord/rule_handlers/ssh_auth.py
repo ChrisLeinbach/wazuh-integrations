@@ -18,6 +18,9 @@ class SSHAuthHandler(BaseHandler):
 
     def generate_fields(self) -> List[dict]:
 
+        user = None
+        src_ip = None
+
         # Attempt to use data Wazuh already extracted.
         if 'data' in self.alert_data.keys():
             user = self.alert_data['data'].get('dstuser') or self.alert_data['data'].get('srcuser')
