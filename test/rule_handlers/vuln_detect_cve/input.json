@@ -27,7 +27,7 @@
         "title": "CVE-2017-13716 affects libsframe1",
         "type": "Packages",
         "rationale": "The C++ symbol demangler routine in cplus-dem.c in libiberty, asdistributed in GNU Binutils 2.29, allows remote attackers to cause a denialof service (excessive memory allocation and application crash) via acrafted file, as demonstrated by a call from the Binary File Descriptor(BFD) library (aka libbfd).",
-        "reference": "https://ubuntu.com/security/CVE-2017-13716, https://www.cve.org/CVERecord?id=CVE-2017-13716",
+        "reference": "https://ubuntu.com/security/CVE-2017-13716, https://www.cve.org/CVERecord?id=CVE-2017-13716, TestRef, TestRef2",
         "score": {
           "version": "3.0",
           "base": "5.500000"

@@ -28,7 +28,7 @@
     {
       "inline": true,
       "name": "Reference",
-      "value": "- https://ubuntu.com/security/CVE-2017-13716\n- https://www.cve.org/CVERecord?id=CVE-2017-13716\n- References truncated to 3."
+      "value": "- https://ubuntu.com/security/CVE-2017-13716\n- https://www.cve.org/CVERecord?id=CVE-2017-13716\n- TestRef\n- References truncated to 3."
     }
   ]
 ]
