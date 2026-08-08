@@ -6,25 +6,32 @@ import inspect
 
 def discover_handlers():
     handler_map = {}
-
     module_path = "discord.rule_handlers"
-    handler_path =  pathlib.Path(__file__).parents[2] / "discord" / "rule_handlers"
-
+    handler_path = pathlib.Path(__file__).parents[2] / "discord" / "rule_handlers"
     for handler_file in handler_path.glob("*.py"):
-        # Skip __init__.py, private files, and the base class.
         if handler_file.name.startswith("_") or handler_file.name == "base_handler.py":
             continue
-
-        # Import the handler file.
         module_name = handler_file.stem
         full_module_path = f"{module_path}.{module_name}"
         module = importlib.import_module(full_module_path)
 
-        # Get the handler's class and add it to the map if it has available test data.
-        for name, obj in inspect.getmembers(module, inspect.isclass):
-            module_test_root = pathlib.Path(__file__).parent / module_name
-            if module_test_root.exists():
-                handler_map[module_name] = obj
+        module_test_root = pathlib.Path(__file__).parent / module_name
+        if not module_test_root.exists():
+            continue
+
+        # Only classes defined in *this* module, not imported ones.
+        local_classes = [
+            obj for name, obj in inspect.getmembers(module, inspect.isclass)
+            if obj.__module__ == full_module_path
+        ]
+
+        if len(local_classes) != 1:
+            raise RuntimeError(
+                f"Expected exactly one handler class defined in {full_module_path}, "
+                f"found: {[c.__name__ for c in local_classes]}"
+            )
+
+        handler_map[module_name] = local_classes[0]
     return handler_map
 
 HANDLER_MAP = discover_handlers()
