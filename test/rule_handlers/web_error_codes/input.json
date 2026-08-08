@@ -1,0 +1,74 @@
+[
+  {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "id": "003",
+      "name": "ExampleAgent",
+      "ip": "192.168.1.1"
+    },
+    "previous_output": "192.168.200.200 - - [08/Aug/2026:19:11:16 +0000] \"GET /data/meow/meow.json.1 HTTP/1.1\" 404 67 \"-\" \"node\"\n192.168.200.200 - - [08/Aug/2026:19:11:13 +0000] \"GET /data/meow/meow.json.2 HTTP/1.1\" 404 67 \"-\" \"node\"\n192.168.200.200 - - [08/Aug/2026:19:11:13 +0000] \"GET /data/meow/meow.json.3 HTTP/1.1\" 404 67 \"-\" \"node\"\"\n192.168.200.200 - - [08/Aug/2026:19:11:13 +0000] \"GET /data/meow/meow.json.4 HTTP/1.1\" 404 67 \"-\" \"node\"\"",
+    "manager": {
+      "name": "wazuh"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.200.200",
+      "id": "404",
+      "url": "/data/meow/meow.json"
+    },
+    "rule": {
+      "firedtimes": 6,
+      "mail": false,
+      "level": 10,
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Multiple web server 400 error codes from same source ip.",
+      "groups": [
+        "web",
+        "accesslog",
+        "web_scan",
+        "recon"
+      ],
+      "mitre": {
+        "technique": [
+          "Vulnerability Scanning"
+        ],
+        "id": [
+          "T1595.002"
+        ],
+        "tactic": [
+          "Reconnaissance"
+        ]
+      },
+      "id": "31151",
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "frequency": 14,
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/nginx/access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "id": "1786216277.3935023",
+    "full_log": "192.168.100.100 - - [08/Aug/2026:19:11:16 +0000] \"GET /data/meow/meow.json HTTP/1.1\" 404 67 \"-\" \"node\"",
+    "timestamp": "2026-08-08T19:11:17.441+0000"
+  }
+]
