@@ -1,0 +1,4 @@
+{
+    "ignored_rule_ids": ["23504", "23505", "31162", "31533"],
+    "field_list_length_limit": 3
+}

@@ -1,7 +1,7 @@
+import re
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
-
-import re
+from custom_discord_config import CustomDiscordConfig
 
 class WebErrorCodeHandler(BaseHandler):
 
@@ -12,8 +12,8 @@ class WebErrorCodeHandler(BaseHandler):
     rule_ids = ['31151']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         source_ip = self.create_new_field("Source IP", self.alert_data['data']['srcip'])
@@ -55,13 +55,4 @@ class WebErrorCodeHandler(BaseHandler):
                 fields = match.groupdict()
                 previous_requests.append(f"{fields['method']} - {fields['path']}")
 
-        return self._format_previous_list(previous_requests)
-
-
-    @staticmethod
-    def _format_previous_list(previous_list: List[str]) -> str:
-        """ Reformats the references entry into a bulleted list. """
-        if len(previous_list) > 3:
-            return '- ' + '\n- '.join(previous_list[:3]) + '\n- Previous requests truncated to 3.'
-        else:
-            return '- ' + '\n- '.join(previous_list)
+        return self.format_field_list(previous_requests)

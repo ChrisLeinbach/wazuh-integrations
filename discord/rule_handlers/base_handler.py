@@ -1,5 +1,6 @@
 from typing import List, Union, Dict
 from copy import deepcopy
+from custom_discord_config import CustomDiscordConfig
 
 
 class BaseHandler:
@@ -31,8 +32,9 @@ class BaseHandler:
         "inline": True
     }
 
-    def __init__(self, alert_data: dict):
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
         self.alert_data = alert_data
+        self.config = shared_config
 
     def __repr__(self):
         return self.__class__.__name__
@@ -69,3 +71,11 @@ class BaseHandler:
     def generate_description(self) -> Union[str, None]:
         """ Returns a string for the description. If no description is provided, it will return None. """
         raise NotImplementedError("Subclasses must implement this method.")
+
+    def format_field_list(self, field_list: List[str]) -> str:
+        """ Converts a list of strings into a Discord formatted list string. Handles truncating and formatting the list. """
+        field_list_length_limit = self.config.field_list_length_limit
+        if len(field_list) > field_list_length_limit:
+            return '- ' + '\n- '.join(field_list[:field_list_length_limit]) + f'\n- Entries truncated to {field_list_length_limit}. ({len(field_list) - field_list_length_limit} hidden)'
+        else:
+            return '- ' + '\n- '.join(field_list)

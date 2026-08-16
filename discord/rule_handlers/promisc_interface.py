@@ -1,6 +1,7 @@
 import re
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class PromiscInterfaceHandler(BaseHandler):
@@ -12,8 +13,8 @@ class PromiscInterfaceHandler(BaseHandler):
     rule_ids = ['5104']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         interface_field = self.create_new_field("Interface", self.extract_device_name(self.alert_data['full_log']))

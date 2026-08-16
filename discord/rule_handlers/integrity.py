@@ -1,5 +1,6 @@
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class IntegrityHandler(BaseHandler):
@@ -12,8 +13,8 @@ class IntegrityHandler(BaseHandler):
     rule_ids = ['550']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         file_field = self.create_new_field("Path", self.alert_data["syscheck"]["path"])

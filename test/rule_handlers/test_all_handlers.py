@@ -3,6 +3,7 @@ import pytest
 import pathlib
 import importlib
 import inspect
+from discord.custom_discord_config import CustomDiscordConfig
 
 def discover_handlers():
     handler_map = {}
@@ -60,6 +61,10 @@ def load_test_cases(handler_name):
 def pytest_generate_tests(metafunc):
     """ Dynamically parametrize based on handler test data. """
     if "handler_case" in metafunc.fixturenames:
+
+        shared_config_path = pathlib.Path(__file__).parent / "shared_test_config.json"
+        shared_config = CustomDiscordConfig(load_json(shared_config_path))
+
         all_cases = []
         for handler_name, handler_class in HANDLER_MAP.items():
             for idx, (input_data, expected_fields, expected_description) in enumerate(load_test_cases(handler_name)):
@@ -69,6 +74,7 @@ def pytest_generate_tests(metafunc):
                     "input_data": input_data,
                     "expected_fields": expected_fields,
                     "expected_description": expected_description,
+                    "shared_config": shared_config
                 }
                 all_cases.append(
                     pytest.param(
@@ -83,7 +89,7 @@ def pytest_generate_tests(metafunc):
 def handler_case(request):
     """ Build a handler instance for each case. """
     case = request.param
-    handler = case["handler_class"](case["input_data"])
+    handler = case["handler_class"](case["input_data"], case['shared_config'])
     return {
         "handler": handler,
         "input_data": case["input_data"],

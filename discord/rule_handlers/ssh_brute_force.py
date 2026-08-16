@@ -1,6 +1,7 @@
 import re
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class SSHBruteForceHandler(BaseHandler):
@@ -12,8 +13,8 @@ class SSHBruteForceHandler(BaseHandler):
     rule_ids = ['5712', '5719']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         events = self.alert_data['previous_output'].split('\n')

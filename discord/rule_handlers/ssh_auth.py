@@ -1,6 +1,7 @@
 import re
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class SSHAuthHandler(BaseHandler):
@@ -13,8 +14,8 @@ class SSHAuthHandler(BaseHandler):
     rule_ids = ['5710', '5718', '5758']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
 

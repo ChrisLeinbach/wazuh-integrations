@@ -1,5 +1,6 @@
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class VulnDetectCVEHandler(BaseHandler):
@@ -11,8 +12,8 @@ class VulnDetectCVEHandler(BaseHandler):
     rule_ids = ['23504', '23505', '23506']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         cve_field = self.create_new_field("CVE", self.alert_data["data"]["vulnerability"]["cve"])
@@ -28,13 +29,9 @@ class VulnDetectCVEHandler(BaseHandler):
                 f"with severity {self.alert_data['data']['vulnerability']['severity']} "
                 f"impacts package {self.alert_data['data']['vulnerability']['package']['name']}.")
 
-    @staticmethod
-    def _format_references(references: str) -> str:
+    def _format_references(self, references: str) -> str:
         """ Reformats the references entry into a bulleted list. """
         if ',' in references:
-            if len(references.split(', ')) > 3:
-                return '- ' + '\n- '.join(references.split(', ')[:3]) + '\n- References truncated to 3.'
-            else:
-                return '- ' + '\n- '.join(references.split(', '))
+            return self.format_field_list(references.split(', '))
         else:
             return '- ' + references

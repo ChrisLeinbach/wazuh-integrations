@@ -5,6 +5,7 @@ import requests
 import json
 import rule_handlers
 import logging
+from custom_discord_config import CustomDiscordConfig
 
 LOG_LEVEL = logging.DEBUG
 LOG_FILE = '/var/ossec/logs/custom-discord.log'
@@ -35,17 +36,13 @@ with open(alert_file) as f:
 if options_file:
     with open(options_file) as f:
         try:
-            options_json = json.loads(f.read())
-            logging.debug(f"Provided Options: {json.dumps(options_json)}")
+            config_obj = CustomDiscordConfig(json.loads(f.read()))
+            logging.debug(f"Provided Options: {json.dumps(config_obj.__dict__)}")
         except json.decoder.JSONDecodeError:
             logging.critical(f'Failed to read integration options data. Check integration configuration in Wazuh GUI.')
             sys.exit(1)
 else:
-    options_json = {}
-
-# Read options. This may require a more intelligent implementation if we add more options but for now this is
-# an acceptable approach.
-IGNORED_RULE_IDS = options_json.get('ignored_rule_ids', [])
+    config_obj = CustomDiscordConfig({})
 
 # Extract alert level and ID from the alert.
 alert_id = alert_json['id']
@@ -54,7 +51,7 @@ alert_level = alert_json["rule"]["level"]
 
 logging.info(f'Loading Alert ID {alert_id} with Rule ID {rule_id} with level {alert_level}.')
 
-if rule_id in IGNORED_RULE_IDS:
+if rule_id in config_obj.ignored_rule_ids:
     logging.info(f'Rule ID {rule_id} is explicitly ignored.')
     sys.exit(0)
 

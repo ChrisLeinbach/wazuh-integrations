@@ -1,5 +1,6 @@
 from typing import List, Union
 from rule_handlers.base_handler import BaseHandler
+from custom_discord_config import CustomDiscordConfig
 
 
 class RootCheckHandler(BaseHandler):
@@ -11,8 +12,8 @@ class RootCheckHandler(BaseHandler):
     rule_ids = ['510']
     enabled = True
 
-    def __init__(self, alert_data: dict):
-        super().__init__(alert_data)
+    def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):
+        super().__init__(alert_data, shared_config)
 
     def generate_fields(self) -> List[dict]:
         log_field = self.create_new_field("Report", self.alert_data["full_log"])
