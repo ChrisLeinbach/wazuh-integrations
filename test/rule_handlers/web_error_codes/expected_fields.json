@@ -4,5 +4,11 @@
     {"name": "Status Code", "value": "404", "inline": true},
     {"name": "Request", "value": "GET - /data/meow/meow.json", "inline": true},
     {"name": "Previous Requests", "value": "- GET - /data/meow/meow.json.1\n- GET - /data/meow/meow.json.2\n- GET - /data/meow/meow.json.3\n- Entries truncated to 3. (1 hidden)", "inline": true}
+  ],
+  [
+    {"name": "Source IP", "value": "192.168.100.100", "inline": true},
+    {"name": "Status Code", "value": "503", "inline": true},
+    {"name": "Request", "value": "GET - /Meow", "inline": true},
+    {"name": "Previous Requests", "value": "- GET - /Meow\n- GET - /Meow\n- GET - /Meow\n- Entries truncated to 3. (7 hidden)", "inline": true}
   ]
 ]

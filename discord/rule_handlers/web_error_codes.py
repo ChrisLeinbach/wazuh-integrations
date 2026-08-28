@@ -9,7 +9,7 @@ class WebErrorCodeHandler(BaseHandler):
     WebErrorCodeHandler handles alerts events from webservers returning error codes.
     """
 
-    rule_ids = ['31151']
+    rule_ids = ['31151', '31163']
     enabled = True
 
     def __init__(self, alert_data: dict, shared_config: CustomDiscordConfig):

@@ -70,5 +70,82 @@
     "id": "1786216277.3935023",
     "full_log": "192.168.100.100 - - [08/Aug/2026:19:11:16 +0000] \"GET /data/meow/meow.json HTTP/1.1\" 404 67 \"-\" \"node\"",
     "timestamp": "2026-08-08T19:11:17.441+0000"
+  },
+  {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "id": "003",
+      "name": "ExampleAgent",
+      "ip": "192.168.1.1"
+    },
+    "previous_output": "192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 73 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 73 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 73 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:37 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:37 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:37 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:37 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"\n192.168.100.100 - - [28/Aug/2026:14:02:37 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"",
+    "manager": {
+      "name": "wazuh"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "192.168.100.100",
+      "id": "503",
+      "url": "/Meow"
+    },
+    "rule": {
+      "mail": false,
+      "level": 10,
+      "pci_dss": [
+        "6.5",
+        "11.4",
+        "10.6.1"
+      ],
+      "hipaa": [
+        "164.312.b"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ],
+      "description": "Multiple web server 503 error code (Service unavailable).",
+      "groups": [
+        "web",
+        "accesslog",
+        "web_scan",
+        "recon"
+      ],
+      "nist_800_53": [
+        "SA.11",
+        "SI.4",
+        "AU.6"
+      ],
+      "frequency": 14,
+      "gdpr": [
+        "IV_35.7.d"
+      ],
+      "firedtimes": 32,
+      "mitre": {
+        "technique": [
+          "Network Denial of Service"
+        ],
+        "id": [
+          "T1498"
+        ],
+        "tactic": [
+          "Impact"
+        ]
+      },
+      "id": "31163"
+    },
+    "location": "/var/log/nginx/access.log",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "id": "1787925760.5895752",
+    "full_log": "192.168.100.100 - - [28/Aug/2026:14:02:38 +0000] \"GET /Meow HTTP/1.1\" 503 68 \"-\" \"node\"",
+    "timestamp": "2026-08-28T14:02:40.720+0000"
   }
 ]
